@@ -16,6 +16,9 @@ namespace HospitalSimulation
         float delayMin;
         float delayMax;
         float delayAverage;
+        HelpForm help;
+        SimulationWindow simulation;
+        Results results;
 
         public FrontPanel()
         {
@@ -24,13 +27,6 @@ namespace HospitalSimulation
             delayMax = Convert.ToInt32(DelayMaxValue.Value);
             delayAverage = ((delayMin + delayMax) / 2);
             AverageDelay.Text = delayAverage.ToString("n2");
-            Results results1 = new Results();
-            HelpForm help1 = new HelpForm();
-            SimulationWindow sim1 = new SimulationWindow();
-            help1.Show();
-            sim1.Show();
-            results1.Show();
-
         }
 
         private void ChangeAveDelay_CheckedChanged(object sender, EventArgs e)
@@ -65,6 +61,24 @@ namespace HospitalSimulation
             delayMax = Convert.ToInt32(DelayMaxValue.Value);
             delayAverage = ((delayMin + delayMax) / 2);
             AverageDelay.Text = delayAverage.ToString("n2");
+        }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            help = new HelpForm();
+            help.Show();
+        }
+
+        private void TimedSimButton_Click(object sender, EventArgs e)
+        {
+            simulation = new SimulationWindow();
+            simulation.Show();
+        }
+
+        private void InstantSimButton_Click(object sender, EventArgs e)
+        {
+            results = new Results();
+            results.Show();
         }
     }
 }

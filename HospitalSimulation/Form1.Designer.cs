@@ -77,6 +77,7 @@
             this.InstantSimButton.TabIndex = 1;
             this.InstantSimButton.Text = "Instant Simulation";
             this.InstantSimButton.UseVisualStyleBackColor = true;
+            this.InstantSimButton.Click += new System.EventHandler(this.InstantSimButton_Click);
             // 
             // TimedSimButton
             // 
@@ -86,6 +87,7 @@
             this.TimedSimButton.TabIndex = 2;
             this.TimedSimButton.Text = "Timed Simulation";
             this.TimedSimButton.UseVisualStyleBackColor = true;
+            this.TimedSimButton.Click += new System.EventHandler(this.TimedSimButton_Click);
             // 
             // ChangeAveDelay
             // 
@@ -208,6 +210,7 @@
             this.HelpButton.TabIndex = 12;
             this.HelpButton.Text = "Help";
             this.HelpButton.UseVisualStyleBackColor = true;
+            this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
             // 
             // Severity1Percent
             // 
