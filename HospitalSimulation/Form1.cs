@@ -12,10 +12,10 @@ namespace HospitalSimulation
 {
     public partial class FrontPanel : Form
     {
-        float delayMin, delayMax, delayAverage;
         int numRooms;
         int[] severityRatings = new int[4];
         int[] roomTimes = new int[4];
+        float delayMin, delayMax, delayAverage;
         float[] waitDelays = new float[3];
         HelpForm help;
         SimulationWindow simulation;
@@ -134,15 +134,21 @@ namespace HospitalSimulation
         private void TimedSimButton_Click(object sender, EventArgs e)
         {
             SetSentValues();
-            simulation = new SimulationWindow(numRooms, severityRatings, roomTimes, waitDelays);
-            simulation.Show();
+            if (CheckChances())
+            {
+                simulation = new SimulationWindow(numRooms, severityRatings, roomTimes, waitDelays);
+                simulation.Show();
+            }
         }
 
         private void InstantSimButton_Click(object sender, EventArgs e)
         {
             SetSentValues();
-            results = new Results();
-            results.Show();
+            if (CheckChances())
+            {
+                results = new Results();
+                results.Show();
+            }
         }
 
         private void SetSentValues()
@@ -159,6 +165,21 @@ namespace HospitalSimulation
             waitDelays[0] = delayMin;
             waitDelays[1] = delayMax;
             waitDelays[2] = delayAverage;
+        }
+
+        private Boolean CheckChances()
+        {
+            int totalChance = 0;
+            for (int i = 0; i <= 3; i++)
+            {
+                totalChance += severityRatings[i];
+            }
+            if (totalChance != 100)
+            {
+                MessageBox.Show("Chance values must add to 100.", "Check values and try again");
+                return false;
+            }
+            return true;
         }
     }
 }
