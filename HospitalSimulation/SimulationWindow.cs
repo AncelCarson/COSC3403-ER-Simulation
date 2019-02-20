@@ -47,45 +47,47 @@ namespace HospitalSimulation
                     Room14Panel.Visible = true;
                     goto case 12;
                 case 12:
-                    Room13Label.Visible = true;
+                    Room13Panel.Visible = true;
                     goto case 11;
                 case 11:
-                    Room12Label.Visible = true;
+                    Room12Panel.Visible = true;
                     goto case 10;
                 case 10:
-                    Room11Label.Visible = true;
+                    Room11Panel.Visible = true;
                     goto case 9;
                 case 9:
-                    Room10Label.Visible = true;
+                    Room10Panel.Visible = true;
                     goto case 8;
                 case 8:
-                    Room9Label.Visible = true;
+                    Room9Panel.Visible = true;
                     goto case 7;
                 case 7:
-                    Room8Label.Visible = true;
+                    Room8Panel.Visible = true;
                     goto case 6;
                 case 6:
-                    Room7Label.Visible = true;
+                    Room7Panel.Visible = true;
                     goto case 5;
                 case 5:
-                    Room6Label.Visible = true;
+                    Room6Panel.Visible = true;
                     goto case 4;
                 case 4:
-                    Room5Label.Visible = true;
+                    Room5Panel.Visible = true;
                     goto case 3;
                 case 3:
-                    Room4Label.Visible = true;
+                    Room4Panel.Visible = true;
                     goto case 2;
                 case 2:
-                    Room3Label.Visible = true;
+                    Room3Panel.Visible = true;
                     goto case 1;
                 case 1:
-                    Room2Label.Visible = true;
+                    Room2Panel.Visible = true;
                     goto case 0;
                 case 0:
-                    Room1Label.Visible = true;
+                    Room1Panel.Visible = true;
                     break;
             }
         }
+
+
     }
 }
