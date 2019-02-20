@@ -127,7 +127,7 @@ namespace HospitalSimulation
 
         private void TimedSimButton_Click(object sender, EventArgs e)
         {
-            numRooms = RoomDropDown.SelectedIndex + 1;
+            numRooms = RoomDropDown.SelectedIndex;
             severityRatings[0] = (int)Severity1Percent.Value;
             severityRatings[1] = (int)Severity2Percent.Value;
             severityRatings[2] = (int)Severity3Percent.Value;
@@ -139,13 +139,13 @@ namespace HospitalSimulation
             waitDelays[0] = delayMin;
             waitDelays[1] = delayMax;
             waitDelays[2] = delayAverage;
-            simulation = new SimulationWindow();
+            simulation = new SimulationWindow(numRooms, severityRatings, roomTimes, waitDelays);
             simulation.Show();
         }
 
         private void InstantSimButton_Click(object sender, EventArgs e)
         {
-            numRooms = RoomDropDown.SelectedIndex + 1;
+            numRooms = RoomDropDown.SelectedIndex;
             severityRatings[0] = (int)Severity1Percent.Value;
             severityRatings[1] = (int)Severity2Percent.Value;
             severityRatings[2] = (int)Severity3Percent.Value;
