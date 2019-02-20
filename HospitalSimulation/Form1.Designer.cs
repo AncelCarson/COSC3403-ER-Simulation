@@ -49,7 +49,7 @@
             this.PercentChance4 = new System.Windows.Forms.Label();
             this.Severity4Percent = new System.Windows.Forms.NumericUpDown();
             this.RoomTime4 = new System.Windows.Forms.Label();
-            this.Severity41RoomWait = new System.Windows.Forms.NumericUpDown();
+            this.Severity4RoomWait = new System.Windows.Forms.NumericUpDown();
             this.RoomTime3 = new System.Windows.Forms.Label();
             this.Severity3RoomWait = new System.Windows.Forms.NumericUpDown();
             this.RoomTime2 = new System.Windows.Forms.Label();
@@ -63,7 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Severity2Percent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Severity3Percent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Severity4Percent)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Severity41RoomWait)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Severity4RoomWait)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Severity3RoomWait)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Severity2RoomWait)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Severity1RoomWait)).BeginInit();
@@ -163,6 +163,7 @@
             this.ChangeNumRooms.TabIndex = 9;
             this.ChangeNumRooms.Text = "Number of avaliable rooms";
             this.ChangeNumRooms.UseVisualStyleBackColor = true;
+            this.ChangeNumRooms.CheckedChanged += new System.EventHandler(this.ChangeNumRooms_CheckedChanged);
             // 
             // RoomDropDown
             // 
@@ -201,6 +202,7 @@
             this.ChangeFreqPercent.TabIndex = 11;
             this.ChangeFreqPercent.Text = "Percent chance per severity";
             this.ChangeFreqPercent.UseVisualStyleBackColor = true;
+            this.ChangeFreqPercent.CheckedChanged += new System.EventHandler(this.ChangeFreqPercent_CheckedChanged);
             // 
             // HelpButton
             // 
@@ -313,15 +315,15 @@
             this.RoomTime4.TabIndex = 29;
             this.RoomTime4.Text = "Severity Rating 4";
             // 
-            // Severity41RoomWait
+            // Severity4RoomWait
             // 
-            this.Severity41RoomWait.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Severity41RoomWait.Enabled = false;
-            this.Severity41RoomWait.Location = new System.Drawing.Point(322, 280);
-            this.Severity41RoomWait.Name = "Severity41RoomWait";
-            this.Severity41RoomWait.Size = new System.Drawing.Size(78, 29);
-            this.Severity41RoomWait.TabIndex = 28;
-            this.Severity41RoomWait.Value = new decimal(new int[] {
+            this.Severity4RoomWait.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Severity4RoomWait.Enabled = false;
+            this.Severity4RoomWait.Location = new System.Drawing.Point(322, 280);
+            this.Severity4RoomWait.Name = "Severity4RoomWait";
+            this.Severity4RoomWait.Size = new System.Drawing.Size(78, 29);
+            this.Severity4RoomWait.TabIndex = 28;
+            this.Severity4RoomWait.Value = new decimal(new int[] {
             20,
             0,
             0,
@@ -406,6 +408,7 @@
             this.ChangeRoomWait.TabIndex = 21;
             this.ChangeRoomWait.Text = "Average room time";
             this.ChangeRoomWait.UseVisualStyleBackColor = true;
+            this.ChangeRoomWait.CheckedChanged += new System.EventHandler(this.ChangeRoomWait_CheckedChanged);
             // 
             // FrontPanel
             // 
@@ -413,7 +416,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(641, 463);
             this.Controls.Add(this.RoomTime4);
-            this.Controls.Add(this.Severity41RoomWait);
+            this.Controls.Add(this.Severity4RoomWait);
             this.Controls.Add(this.RoomTime3);
             this.Controls.Add(this.Severity3RoomWait);
             this.Controls.Add(this.RoomTime2);
@@ -449,7 +452,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Severity2Percent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Severity3Percent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Severity4Percent)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Severity41RoomWait)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Severity4RoomWait)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Severity3RoomWait)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Severity2RoomWait)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Severity1RoomWait)).EndInit();
@@ -480,7 +483,7 @@
         private System.Windows.Forms.Label PercentChance4;
         private System.Windows.Forms.NumericUpDown Severity4Percent;
         private System.Windows.Forms.Label RoomTime4;
-        private System.Windows.Forms.NumericUpDown Severity41RoomWait;
+        private System.Windows.Forms.NumericUpDown Severity4RoomWait;
         private System.Windows.Forms.Label RoomTime3;
         private System.Windows.Forms.NumericUpDown Severity3RoomWait;
         private System.Windows.Forms.Label RoomTime2;
