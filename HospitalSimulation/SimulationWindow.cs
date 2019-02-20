@@ -38,80 +38,53 @@ namespace HospitalSimulation
 
         void OpenRooms(int numRooms)
         {
-            Room1Panel.Visible = true;
-            if(numRooms == 0)
+            switch (numRooms)
             {
-                return;
-            }
-            Room2Panel.Visible = true;
-            if (numRooms == 1)
-            {
-                return;
-            }
-            Room3Panel.Visible = true;
-            if (numRooms == 2)
-            {
-                return;
-            }
-            Room4Panel.Visible = true;
-            if (numRooms == 3)
-            {
-                return;
-            }
-            Room5Panel.Visible = true;
-            if (numRooms == 4)
-            {
-                return;
-            }
-            Room6Panel.Visible = true;
-            if (numRooms == 5)
-            {
-                return;
-            }
-            Room7Panel.Visible = true;
-            if (numRooms == 6)
-            {
-                return;
-            }
-            Room8Panel.Visible = true;
-            if (numRooms == 7)
-            {
-                return;
-            }
-            Room9Panel.Visible = true;
-            if (numRooms == 8)
-            {
-                return;
-            }
-            Room10Panel.Visible = true;
-            if (numRooms == 9)
-            {
-                return;
-            }
-            Room11Panel.Visible = true;
-            if (numRooms == 10)
-            {
-                return;
-            }
-            Room12Panel.Visible = true;
-            if (numRooms == 11)
-            {
-                return;
-            }
-            Room13Panel.Visible = true;
-            if (numRooms == 12)
-            {
-                return;
-            }
-            Room14Panel.Visible = true;
-            if (numRooms == 13)
-            {
-                return;
-            }
-            Room15Panel.Visible = true;
-            if (numRooms == 14)
-            {
-                return;
+                case 14:
+                    Room15Panel.Visible = true;
+                    goto case 13;
+                case 13:
+                    Room14Panel.Visible = true;
+                    goto case 12;
+                case 12:
+                    Room13Label.Visible = true;
+                    goto case 11;
+                case 11:
+                    Room12Label.Visible = true;
+                    goto case 10;
+                case 10:
+                    Room11Label.Visible = true;
+                    goto case 9;
+                case 9:
+                    Room10Label.Visible = true;
+                    goto case 8;
+                case 8:
+                    Room9Label.Visible = true;
+                    goto case 7;
+                case 7:
+                    Room8Label.Visible = true;
+                    goto case 6;
+                case 6:
+                    Room7Label.Visible = true;
+                    goto case 5;
+                case 5:
+                    Room6Label.Visible = true;
+                    goto case 4;
+                case 4:
+                    Room5Label.Visible = true;
+                    goto case 3;
+                case 3:
+                    Room4Label.Visible = true;
+                    goto case 2;
+                case 2:
+                    Room3Label.Visible = true;
+                    goto case 1;
+                case 1:
+                    Room2Label.Visible = true;
+                    goto case 0;
+                case 0:
+                    Room1Label.Visible = true;
+                    break;
             }
         }
     }
