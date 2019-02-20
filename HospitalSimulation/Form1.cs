@@ -121,8 +121,14 @@ namespace HospitalSimulation
 
         private void HelpButton_Click(object sender, EventArgs e)
         {
+            if (help != null)
+            {
+                help.Close();
+            }
+
             help = new HelpForm();
             help.Show();
+
         }
 
         private void TimedSimButton_Click(object sender, EventArgs e)
