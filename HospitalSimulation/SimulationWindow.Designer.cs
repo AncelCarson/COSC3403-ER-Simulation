@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.TimeCompleteProgress = new System.Windows.Forms.ProgressBar();
             this.RoomsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.Room15Panel = new System.Windows.Forms.TableLayoutPanel();
@@ -97,6 +98,7 @@
             this.AveWait3 = new System.Windows.Forms.Label();
             this.AveWait2 = new System.Windows.Forms.Label();
             this.AveWait4 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.RoomsPanel.SuspendLayout();
             this.Room15Panel.SuspendLayout();
             this.Room14Panel.SuspendLayout();
@@ -1122,5 +1124,6 @@
         private System.Windows.Forms.Label AveWait3;
         private System.Windows.Forms.Label AveWait2;
         private System.Windows.Forms.Label AveWait4;
+        private System.Windows.Forms.Timer timer1;
     }
 }
