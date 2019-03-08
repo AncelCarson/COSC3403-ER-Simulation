@@ -15,6 +15,30 @@ namespace HospitalSimulation
         public SimulationWindow()
         {
             InitializeComponent();
+
+            TableLayoutPanel[] Rooms = new TableLayoutPanel[15];
+            Rooms[0] = Room1Panel;
+            Rooms[1] = Room2Panel;
+            Rooms[2] = Room3Panel;
+            Rooms[3] = Room4Panel;
+            Rooms[4] = Room5Panel;
+            Rooms[5] = Room6Panel;
+            Rooms[6] = Room7Panel;
+            Rooms[7] = Room8Panel;
+            Rooms[8] = Room9Panel;
+            Rooms[9] = Room10Panel;
+            Rooms[10] = Room11Panel;
+            Rooms[11] = Room12Panel;
+            Rooms[12] = Room13Panel;
+            Rooms[13] = Room14Panel;
+            Rooms[14] = Room15Panel;
+
+            Label[] AveWait = new Label[4];
+            AveWait[0] = AveWait1;
+            AveWait[1] = AveWait2;
+            AveWait[2] = AveWait3;
+            AveWait[3] = AveWait4;
+
             Room1Panel.Visible = true;
             Room2Panel.Visible = true;
             Room3Panel.Visible = true;
