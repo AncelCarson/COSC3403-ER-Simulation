@@ -28,6 +28,34 @@ namespace HospitalSimulation
             delayMax = (float)DelayMaxValue.Value;
             delayAverage = ((delayMin + delayMax) / 2);
             AverageDelay.Text = delayAverage.ToString("n2");
+
+            /*
+            Label[] PercentChance = new Label[4];
+            PercentChance[0] = PercentChance1;
+            PercentChance[1] = PercentChance2;
+            PercentChance[2] = PercentChance3;
+            PercentChance[3] = PercentChance4;
+            */
+
+            /*
+            Label[] RoomTime = new Label[4];
+            RoomTime[0] = RoomTime1;
+            RoomTime[1] = RoomTime2;
+            RoomTime[2] = RoomTime3;
+            RoomTime[3] = RoomTime4;
+            */
+
+            NumericUpDown[] SeverityPercent = new NumericUpDown[4];
+            SeverityPercent[0] = Severity1Percent;
+            SeverityPercent[1] = Severity2Percent;
+            SeverityPercent[2] = Severity3Percent;
+            SeverityPercent[3] = Severity4Percent;
+
+            NumericUpDown[] WaitTime = new NumericUpDown[4];
+            WaitTime[0] = Severity1RoomWait;
+            WaitTime[1] = Severity2RoomWait;
+            WaitTime[2] = Severity3RoomWait;
+            WaitTime[3] = Severity4RoomWait;
         }
 
         private void ChangeAveDelay_CheckedChanged(object sender, EventArgs e)
