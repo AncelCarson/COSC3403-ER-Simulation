@@ -45,6 +45,7 @@ namespace HospitalSimulation
             RoomTime[3] = RoomTime4;
             */
 
+            /*
             NumericUpDown[] SeverityPercent = new NumericUpDown[4];
             SeverityPercent[0] = Severity1Percent;
             SeverityPercent[1] = Severity2Percent;
@@ -56,6 +57,7 @@ namespace HospitalSimulation
             WaitTime[1] = Severity2RoomWait;
             WaitTime[2] = Severity3RoomWait;
             WaitTime[3] = Severity4RoomWait;
+            */
         }
 
         private void ChangeAveDelay_CheckedChanged(object sender, EventArgs e)
