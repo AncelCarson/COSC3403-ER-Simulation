@@ -66,7 +66,7 @@
             this.Room7Panel = new System.Windows.Forms.TableLayoutPanel();
             this.Room7PatientRating = new System.Windows.Forms.Label();
             this.Room7Label = new System.Windows.Forms.Label();
-            this.Room17PatientNumber = new System.Windows.Forms.Label();
+            this.Room7PatientNumber = new System.Windows.Forms.Label();
             this.Room6Panel = new System.Windows.Forms.TableLayoutPanel();
             this.Room6PatientRating = new System.Windows.Forms.Label();
             this.Room6Label = new System.Windows.Forms.Label();
@@ -579,7 +579,7 @@
             this.Room7Panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Room7Panel.Controls.Add(this.Room7PatientRating, 0, 2);
             this.Room7Panel.Controls.Add(this.Room7Label, 0, 0);
-            this.Room7Panel.Controls.Add(this.Room17PatientNumber, 0, 1);
+            this.Room7Panel.Controls.Add(this.Room7PatientNumber, 0, 1);
             this.Room7Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Room7Panel.Enabled = false;
             this.Room7Panel.Location = new System.Drawing.Point(182, 164);
@@ -614,16 +614,16 @@
             this.Room7Label.Text = "Room 7";
             this.Room7Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Room17PatientNumber
+            // Room7PatientNumber
             // 
-            this.Room17PatientNumber.AutoSize = true;
-            this.Room17PatientNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Room17PatientNumber.Location = new System.Drawing.Point(3, 30);
-            this.Room17PatientNumber.Name = "Room17PatientNumber";
-            this.Room17PatientNumber.Size = new System.Drawing.Size(163, 60);
-            this.Room17PatientNumber.TabIndex = 1;
-            this.Room17PatientNumber.Text = "Patient #: 3";
-            this.Room17PatientNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Room7PatientNumber.AutoSize = true;
+            this.Room7PatientNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Room7PatientNumber.Location = new System.Drawing.Point(3, 30);
+            this.Room7PatientNumber.Name = "Room7PatientNumber";
+            this.Room7PatientNumber.Size = new System.Drawing.Size(163, 60);
+            this.Room7PatientNumber.TabIndex = 1;
+            this.Room7PatientNumber.Text = "Patient #: 3";
+            this.Room7PatientNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Room6Panel
             // 
@@ -1092,7 +1092,7 @@
         private System.Windows.Forms.TableLayoutPanel Room7Panel;
         private System.Windows.Forms.Label Room7PatientRating;
         private System.Windows.Forms.Label Room7Label;
-        private System.Windows.Forms.Label Room17PatientNumber;
+        private System.Windows.Forms.Label Room7PatientNumber;
         private System.Windows.Forms.TableLayoutPanel Room6Panel;
         private System.Windows.Forms.Label Room6PatientRating;
         private System.Windows.Forms.Label Room6Label;
