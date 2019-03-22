@@ -16,7 +16,7 @@ namespace HospitalSimulation
         private Label[] PatientNum = new Label[15];
         private Label[] PatientRating = new Label[15];
         private Label[] AveWait = new Label[4];
-        Queue<Patient>[] RatingLine = null;
+        Queue<Patient>[] RatingLine = new Queue<Patient>[4];
 
         public SimulationWindow()
         {
@@ -99,11 +99,6 @@ namespace HospitalSimulation
             AveWait[1] = AveWait2;
             AveWait[2] = AveWait3;
             AveWait[3] = AveWait4;
-
-            for(int i = 0; i < 4; i++)
-            {
-                RatingLine[i] = new Queue<Patient>();
-            }
         }
 
         void OpenRooms(int numRooms)
