@@ -28,27 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpForm));
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox1
+            // label1
             // 
-            this.textBox1.Location = new System.Drawing.Point(37, 25);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(234, 184);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "information will be pisplayed here to guide the user through the use of the simul" +
-    "ation\r\n";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(556, 975);
+            this.label1.TabIndex = 1;
+            this.label1.Text = resources.GetString("label1.Text");
             // 
             // HelpForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 244);
-            this.Controls.Add(this.textBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ClientSize = new System.Drawing.Size(576, 1002);
+            this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "HelpForm";
             this.Text = "HelpForm";
             this.ResumeLayout(false);
@@ -57,7 +56,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
     }
 }

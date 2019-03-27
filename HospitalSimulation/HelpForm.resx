@@ -117,4 +117,45 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>This program simulates the flow of patients through an ER in
+a typical day. For the porpose of having an effective simulation,
+hours are repesented as minutes and minutes as seconds.
+
+Average patient arival delay:
+   The two values to be entered are the minimum and maximum
+   delay between patients arriving in minutes. The number at the
+   end is the average delay between patients.
+
+Percent chance per severity:
+   The four values here represent the make up and distribution
+   of patients in different categories. Rating 1 is a minor injury
+   while a rating 4 is a life or death emergency. Each value is a 
+   percentage saying how many patients, out of 100, are in each
+   category. As such the four values should add to 100.
+
+Number of available rooms:
+   This number represents how many patients can be treated at
+   the same time. A larger value will often result in rooms not 
+   being used whereas a smaller value will result in long wait 
+   times.
+
+Average room time:
+   The values here represent the average amount of time, in 
+   minutes, that patint will need to be in a room while they are
+   treated. Each values is in relation with rating as with the 
+   "Percent chance per severity."
+
+Shift length:
+   The shift length represents the amount of time, in hours, that
+   the hospital will be recieving new patients. After the time is
+   completed the program will room the remaining petients and 
+   end displaying the results.
+
+Timed and Instant simulation buttons:
+   The buttons will run the simulation with the specifications 
+   described above. The timed simulation will show the flow of 
+   patients to visualize the process. The instant simulation will 
+   quickly calculate the results and display them.</value>
+  </data>
 </root>
