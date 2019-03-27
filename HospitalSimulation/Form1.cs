@@ -211,5 +211,13 @@ namespace HospitalSimulation
             }
             return true;
         }
+
+        void InstantSimulation()
+        {
+            //Pregenerate patients
+            
+
+            //
+        }
     }
 }
