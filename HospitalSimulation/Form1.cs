@@ -20,6 +20,7 @@ namespace HospitalSimulation
         HelpForm help;
         SimulationWindow simulation;
         Results results;
+        int shiftLen;
 
         public FrontPanel()
         {
@@ -28,7 +29,8 @@ namespace HospitalSimulation
             delayMax = (float)DelayMaxValue.Value;
             delayAverage = ((delayMin + delayMax) / 2);
             AverageDelay.Text = delayAverage.ToString("n2");
-
+            shiftLength.Enabled = true;
+            shiftLen = (int)shiftLength.Value;
             /*
             Label[] PercentChance = new Label[4];
             PercentChance[0] = PercentChance1;
@@ -214,10 +216,32 @@ namespace HospitalSimulation
 
         void InstantSimulation()
         {
+            /*
             //Pregenerate patients
-            
+            for (int j = 0; j <= shiftLen * 60;)
+            {
+                //Create new patient
+                //j += patient[].GetDelayTime();
+            }
 
-            //
+            //Preliminary sort and lowest seen time of first numRooms
+
+            //Run Shift
+            for (int i = 0; i <= shiftLen * 60;)
+            {
+                for (int ii=0; i < numRooms; i++)
+                {
+                    //Remove roomtime by shortest
+                }
+
+                //Add wait time to other patients
+
+                //Resort Queue
+            }
+
+            //While loop check if still patients
+                //Same operations as run shift
+            */
         }
     }
 }
