@@ -6,7 +6,8 @@ public class Patient
         rating, 
         roomTime,
         arrivalTime,
-        waitLength;
+        waitLength,
+        priorityNum;
     private static int totalPatientNum;
     private float delayTime;
     Random rnd = new Random();
@@ -20,11 +21,11 @@ public class Patient
 	}
 
     //Constructor used to crete random patient
-    public Patient(int[] severityRatings, int[] roomTimes, float[] waitDelays)
+    public Patient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays)
     {
-        SetRating(severityRatings);
-        SetRoomTime(roomTimes);
-        SetDelayTime(waitDelays);
+        SetRating(ref severityRatings);
+        SetRoomTime(ref roomTimes);
+        SetDelayTime(ref waitDelays);
     }
 
     //returns rating of patient
@@ -45,21 +46,27 @@ public class Patient
         return totalPatientNum;
     }
 
+    //Get Priority Number
+    public int GetPriorityNum()
+    {
+        return priorityNum;
+    }
+
     //sets the time the patient arrived at the hospital
-    public void SetArrivalTime(int localTime)
+    public void SetArrivalTime(ref int localTime)
     {
         arrivalTime = localTime;
     }
 
     //Determines how long a patient waited and returns how long it will be in a room
-    public int Roomed(int localTime)
+    public int Roomed(ref int localTime)
     {
         waitLength = localTime - arrivalTime;
         return roomTime;
     }
 
     //randomly assigns a rating to the patient
-    private void SetRating(int[] severityRatings)
+    private void SetRating(ref int[] severityRatings)
     {
         int rand = rnd.Next(1, 100);
         for (int i = 0; i < severityRatings.Length; i++)
@@ -74,7 +81,7 @@ public class Patient
     }
 
     //Assigns appropriate room time with a chance of increased time
-    private void SetRoomTime(int[] roomTimes)
+    private void SetRoomTime(ref int[] roomTimes)
     {
 
         switch (rating)
@@ -101,7 +108,7 @@ public class Patient
     }
 
     //randomly assigns time gap between patients
-    private void SetDelayTime(float[] waitDelays)
+    private void SetDelayTime(ref float[] waitDelays)
     {
         float totalDelay = waitDelays[1] - waitDelays[0];
         delayTime = totalDelay * (rnd.Next(100) / (float)100.0);
