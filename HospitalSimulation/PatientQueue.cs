@@ -71,7 +71,7 @@ namespace HospitalSimulation
                 queue[position - 1] = queue[rooms];
                 for(int i = rooms; i < index; i++)
                 {
-                    queue[i + 1] = queue[i];
+                    queue[i] = queue[i + 1];
                 }
             }
             else

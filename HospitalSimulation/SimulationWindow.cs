@@ -12,6 +12,9 @@ namespace HospitalSimulation
 {
     public partial class SimulationWindow : Form
     {
+        int numRooms;
+        int[] severityRatings, roomTimes;
+        float[] waitDelays;
         private TableLayoutPanel[] Rooms = new TableLayoutPanel[15];
         private Label[] PatientNum = new Label[15];
         private Label[] PatientRating = new Label[15];
@@ -38,11 +41,16 @@ namespace HospitalSimulation
             results.Show();
         }
 
-        public SimulationWindow(int numRooms, int[] severityRatings, int [] roomTimes, float[] waitDelays)
+        public SimulationWindow(int rooms, int[] ratings, int[] times, float[] delays)
         {
+            numRooms = rooms;
+            severityRatings = ratings;
+            roomTimes = times;
+            waitDelays = delays;
             InitializeComponent();
             SetGroups();
             OpenRooms(numRooms);
+            RunSimulation();
         }
 
         private void SetGroups()
@@ -78,7 +86,7 @@ namespace HospitalSimulation
             PatientNum[12] = Room13PatientNumber;
             PatientNum[13] = Room14PatientNumber;
             PatientNum[14] = Room15PatientNumber;
-            
+
             PatientRating[0] = Room1PatientRating;
             PatientRating[1] = Room2PatientRating;
             PatientRating[2] = Room3PatientRating;
@@ -101,11 +109,23 @@ namespace HospitalSimulation
             AveWait[3] = AveWait4;
         }
 
-        void OpenRooms(int numRooms)
+        private void OpenRooms(int numRooms)
         {
             for (int i = 0; i <= numRooms; i++)
             {
                 Rooms[i].Visible = true;
+            }
+        }
+
+        private void RunSimulation()
+        {
+            Boolean simRun = true, makePatients = true;
+            while (simRun)
+            {
+                if (makePatients)
+                {
+                    Patient newPatient = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
+                }
             }
         }
     }
