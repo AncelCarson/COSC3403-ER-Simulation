@@ -23,15 +23,33 @@ namespace HospitalSimulation
             queue = new Patient[size];
         }
 
-        public float AddPatient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays)
+        public Patient AddPatient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays)
         {
             if(size == index + 1)
             {
                 Resize();
             }
-            queue[index] = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
-            index++;
-            return 8;
+            if (index < rooms - 1)
+            {
+                for (int i = 0; i < index; i++)
+                {
+                    if (queue[i] == null)
+                    {
+                        queue[i] = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
+                        return queue[index];
+                    }
+                }
+
+                queue[index] = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
+                index++;
+                return queue[index];
+            }
+            else
+            {
+                queue[index] = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
+                index++;
+                return queue[index];
+            }
         }
 
         private void Resize()
@@ -53,7 +71,7 @@ namespace HospitalSimulation
         public void SortQueue()
         {
             //Might need to be >=
-            for(int i = index; i >= this.rooms; i--)
+            for(int i = index; i >= rooms; i--)
             {
                 if (queue[i].GetPriorityNum() > queue[i - 1].GetPriorityNum())
                 {
@@ -73,6 +91,7 @@ namespace HospitalSimulation
                 {
                     queue[i] = queue[i + 1];
                 }
+                index--;
             }
             else
             {
