@@ -21,6 +21,7 @@ namespace HospitalSimulation
         SimulationWindow simulation;
         Results results;
         int shiftLen;
+        PatientQueue patients;
 
         public FrontPanel()
         {
@@ -217,17 +218,18 @@ namespace HospitalSimulation
         void InstantSimulation()
         {
             /*
+             * int shiftRemaining = shiftLen * 60;
             //Pregenerate patients
             for (int j = 0; j <= shiftLen * 60;)
             {
                 //Create new patient
-                //j += patient[].GetDelayTime();
+                j += patients.AddPatient().GetDelayTime();
             }
 
-            //Preliminary sort and lowest seen time of first numRooms
+            shiftRemaining -= patients.GetPatient(1).GetDelayTime();
 
             //Run Shift
-            for (int i = 0; i <= shiftLen * 60;)
+            for (int i = 0; i <= shiftRemaining;)
             {
                 for (int ii=0; i < numRooms; i++)
                 {
