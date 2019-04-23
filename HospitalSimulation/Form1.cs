@@ -168,7 +168,8 @@ namespace HospitalSimulation
             SetSentValues();
             if (CheckChances())
             {
-                simulation = new SimulationWindow(numRooms, severityRatings, roomTimes, waitDelays);
+                //simulation = new SimulationWindow(numRooms, severityRatings, roomTimes, waitDelays);
+                simulation = new SimulationWindow();
                 simulation.Show();
             }
         }
