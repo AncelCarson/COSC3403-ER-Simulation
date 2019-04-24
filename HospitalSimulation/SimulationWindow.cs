@@ -12,9 +12,10 @@ namespace HospitalSimulation
 {
     public partial class SimulationWindow : Form
     {
-        int numRooms;
+        int numRooms, shiftLength, tick = 0;
         int[] severityRatings, roomTimes;
         float[] waitDelays;
+        Boolean simRun = true, makePatients = true;
         private TableLayoutPanel[] Rooms = new TableLayoutPanel[15];
         private Label[] PatientNum = new Label[15];
         private Label[] PatientRating = new Label[15];
@@ -41,7 +42,7 @@ namespace HospitalSimulation
             results.Show();
         }
 
-        public SimulationWindow(int rooms, int[] ratings, int[] times, float[] delays)
+        public SimulationWindow(int rooms, int shiftLen, int[] ratings, int[] times, float[] delays)
         {
             numRooms = rooms;
             severityRatings = ratings;
@@ -50,7 +51,8 @@ namespace HospitalSimulation
             InitializeComponent();
             SetGroups();
             OpenRooms(numRooms);
-            RunSimulation();
+            shiftLength = shiftLen;
+            timer1.Start();
         }
 
         private void SetGroups()
@@ -117,16 +119,14 @@ namespace HospitalSimulation
             }
         }
 
-        private void RunSimulation()
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            Boolean simRun = true, makePatients = true;
-            while (simRun)
+            if (makePatients)
             {
-                if (makePatients)
-                {
-                    Patient newPatient = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
-                }
+                Patient newPatient = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
             }
+            tick++;
+            TimeCompleteProgress.Value = (int)(((float)tick / ((float)shiftLength * 600))*100);
         }
     }
 }

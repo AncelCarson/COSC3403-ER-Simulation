@@ -31,7 +31,6 @@ namespace HospitalSimulation
             delayAverage = ((delayMin + delayMax) / 2);
             AverageDelay.Text = delayAverage.ToString("n2");
             shiftLength.Enabled = true;
-            shiftLen = (int)shiftLength.Value;
             /*
             Label[] PercentChance = new Label[4];
             PercentChance[0] = PercentChance1;
@@ -152,6 +151,11 @@ namespace HospitalSimulation
             }
         }
 
+        private void shiftLength_ValueChanged(object sender, EventArgs e)
+        {
+            shiftLen = (int)shiftLength.Value;
+        }
+
         private void HelpButton_Click(object sender, EventArgs e)
         {
             if (help != null)
@@ -169,8 +173,7 @@ namespace HospitalSimulation
             SetSentValues();
             if (CheckChances())
             {
-                //simulation = new SimulationWindow(numRooms, severityRatings, roomTimes, waitDelays);
-                simulation = new SimulationWindow();
+                simulation = new SimulationWindow(numRooms, shiftLen, severityRatings, roomTimes, waitDelays);
                 simulation.Show();
             }
         }

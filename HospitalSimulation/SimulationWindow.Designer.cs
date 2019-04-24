@@ -1001,6 +1001,10 @@
             this.AveWait4.TabIndex = 8;
             this.AveWait4.Text = "Severity rating 4: 5";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // SimulationWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
