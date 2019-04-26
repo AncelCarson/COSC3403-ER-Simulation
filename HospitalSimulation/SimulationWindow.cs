@@ -15,7 +15,7 @@ namespace HospitalSimulation
         int numRooms, shiftLength, tick = 0;
         int[] severityRatings, roomTimes;
         float[] waitDelays;
-        Boolean simRun = true, makePatients = true;
+        Boolean simRun = true, makePatients = true, midSave = false;
         private TableLayoutPanel[] Rooms = new TableLayoutPanel[15];
         private Label[] PatientNum = new Label[15];
         private Label[] PatientRating = new Label[15];
@@ -45,14 +45,30 @@ namespace HospitalSimulation
         public SimulationWindow(int rooms, int shiftLen, int[] ratings, int[] times, float[] delays)
         {
             numRooms = rooms;
+            shiftLength = shiftLen;
             severityRatings = ratings;
             roomTimes = times;
             waitDelays = delays;
             InitializeComponent();
+            setupItems();
+            timer1.Start();
+        }
+
+        private void setupItems()
+        {
             SetGroups();
             OpenRooms(numRooms);
-            shiftLength = shiftLen;
-            timer1.Start();
+            setDispText();
+        }
+
+        private void setDispText()
+        {
+            ShiftLengthLabel.Text = "Progress of " + shiftLength + " hour shift";
+            AveWait1.Text = "Severity rating 1: " + AveWait[0];
+            AveWait2.Text = "Severity rating 1: " + AveWait[1];
+            AveWait3.Text = "Severity rating 1: " + AveWait[2];
+            AveWait4.Text = "Severity rating 1: " + AveWait[3];
+            PatientWaitLabel.Text = "Number of patients waiting: " + (RatingLine[0].Count + RatingLine[1].Count + RatingLine[2].Count + RatingLine[3].Count);
         }
 
         private void SetGroups()
@@ -125,8 +141,25 @@ namespace HospitalSimulation
             {
                 Patient newPatient = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
             }
+
+            if (tick < (shiftLength * 600))
+            {
+                TimeCompleteProgress.Value = (int)(((float)tick / ((float)shiftLength * 600)) * 100);
+            }
+            else
+            {
+                TimeCompleteProgress.Value = 100;
+                if (!midSave)
+                {
+                    afterShift();
+                }
+            }
             tick++;
-            TimeCompleteProgress.Value = (int)(((float)tick / ((float)shiftLength * 600))*100);
+        }
+
+        private void afterShift()
+        {
+            midSave = true;
         }
     }
 }
