@@ -50,25 +50,20 @@ namespace HospitalSimulation
             roomTimes = times;
             waitDelays = delays;
             InitializeComponent();
-            setupItems();
-            timer1.Start();
+            SetupItems();
+            Timer1.Start();
         }
 
-        private void setupItems()
+        private void SetupItems()
         {
+            SetDispText();
             SetGroups();
             OpenRooms(numRooms);
-            setDispText();
         }
 
-        private void setDispText()
+        private void SetDispText()
         {
             ShiftLengthLabel.Text = "Progress of " + shiftLength + " hour shift";
-            AveWait1.Text = "Severity rating 1: " + AveWait[0];
-            AveWait2.Text = "Severity rating 1: " + AveWait[1];
-            AveWait3.Text = "Severity rating 1: " + AveWait[2];
-            AveWait4.Text = "Severity rating 1: " + AveWait[3];
-            PatientWaitLabel.Text = "Number of patients waiting: " + (RatingLine[0].Count + RatingLine[1].Count + RatingLine[2].Count + RatingLine[3].Count);
         }
 
         private void SetGroups()
@@ -135,7 +130,7 @@ namespace HospitalSimulation
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             if (makePatients)
             {
@@ -151,15 +146,24 @@ namespace HospitalSimulation
                 TimeCompleteProgress.Value = 100;
                 if (!midSave)
                 {
-                    afterShift();
+                    AfterShift();
                 }
             }
             tick++;
         }
 
-        private void afterShift()
+        private void AfterShift()
         {
             midSave = true;
+        }
+
+        public void UpdateText()
+        {
+            //AveWait1.Text = "Severity rating 1: " + AveWait[0];
+            //AveWait2.Text = "Severity rating 2: " + AveWait[1];
+            //AveWait3.Text = "Severity rating 3: " + AveWait[2];
+            //AveWait4.Text = "Severity rating 4: " + AveWait[3];
+            //PatientWaitLabel.Text = "Number of patients waiting: " + (RatingLine[0].Count + RatingLine[1].Count + RatingLine[2].Count + RatingLine[3].Count);
         }
     }
 }

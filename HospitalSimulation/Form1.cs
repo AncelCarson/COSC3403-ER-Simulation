@@ -191,6 +191,7 @@ namespace HospitalSimulation
         private void SetSentValues()
         {
             numRooms = RoomDropDown.SelectedIndex;
+            shiftLen = (int)shiftLength.Value;
             severityRatings[0] = (int)Severity1Percent.Value;
             severityRatings[1] = (int)Severity2Percent.Value;
             severityRatings[2] = (int)Severity3Percent.Value;

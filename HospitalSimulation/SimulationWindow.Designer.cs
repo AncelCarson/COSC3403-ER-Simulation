@@ -98,7 +98,7 @@
             this.AveWait3 = new System.Windows.Forms.Label();
             this.AveWait2 = new System.Windows.Forms.Label();
             this.AveWait4 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.Timer1 = new System.Windows.Forms.Timer(this.components);
             this.RoomsPanel.SuspendLayout();
             this.Room15Panel.SuspendLayout();
             this.Room14Panel.SuspendLayout();
@@ -1001,9 +1001,9 @@
             this.AveWait4.TabIndex = 8;
             this.AveWait4.Text = "Severity rating 4: 5";
             // 
-            // timer1
+            // Timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.Timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // SimulationWindow
             // 
@@ -1128,6 +1128,6 @@
         private System.Windows.Forms.Label AveWait3;
         private System.Windows.Forms.Label AveWait2;
         private System.Windows.Forms.Label AveWait4;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer Timer1;
     }
 }
