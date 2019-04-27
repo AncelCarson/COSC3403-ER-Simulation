@@ -65,7 +65,7 @@ namespace HospitalSimulation
 
         public int GetSize()
         {
-            return size;
+            return index;
         }
 
         public Patient GetPatient (int position)

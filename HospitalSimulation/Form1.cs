@@ -26,11 +26,26 @@ namespace HospitalSimulation
         public FrontPanel()
         {
             InitializeComponent();
+
+            //Initialize Varraibles
             delayMin = (float)DelayMinValue.Value;
             delayMax = (float)DelayMaxValue.Value;
             delayAverage = ((delayMin + delayMax) / 2);
             AverageDelay.Text = delayAverage.ToString("n2");
             shiftLength.Enabled = true;
+            numRooms = RoomDropDown.SelectedIndex;
+            shiftLen = (int)shiftLength.Value;
+            severityRatings[0] = (int)Severity1Percent.Value;
+            severityRatings[1] = (int)Severity2Percent.Value;
+            severityRatings[2] = (int)Severity3Percent.Value;
+            severityRatings[3] = (int)Severity4Percent.Value;
+            roomTimes[0] = (int)Severity1RoomWait.Value;
+            roomTimes[1] = (int)Severity2RoomWait.Value;
+            roomTimes[2] = (int)Severity3RoomWait.Value;
+            roomTimes[3] = (int)Severity4RoomWait.Value;
+            waitDelays[0] = delayMin;
+            waitDelays[1] = delayMax;
+            waitDelays[2] = delayAverage;
             /*
             Label[] PercentChance = new Label[4];
             PercentChance[0] = PercentChance1;
@@ -170,7 +185,6 @@ namespace HospitalSimulation
 
         private void TimedSimButton_Click(object sender, EventArgs e)
         {
-            SetSentValues();
             if (CheckChances())
             {
                 simulation = new SimulationWindow(numRooms, shiftLen, severityRatings, roomTimes, waitDelays);
@@ -189,21 +203,9 @@ namespace HospitalSimulation
             }
         }
 
-        private void SetSentValues()
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            numRooms = RoomDropDown.SelectedIndex;
-            shiftLen = (int)shiftLength.Value;
-            severityRatings[0] = (int)Severity1Percent.Value;
-            severityRatings[1] = (int)Severity2Percent.Value;
-            severityRatings[2] = (int)Severity3Percent.Value;
-            severityRatings[3] = (int)Severity4Percent.Value;
-            roomTimes[0] = (int)Severity1RoomWait.Value;
-            roomTimes[1] = (int)Severity2RoomWait.Value;
-            roomTimes[2] = (int)Severity3RoomWait.Value;
-            roomTimes[3] = (int)Severity4RoomWait.Value;
-            waitDelays[0] = delayMin;
-            waitDelays[1] = delayMax;
-            waitDelays[2] = delayAverage;
+            Close();
         }
 
         private Boolean CheckChances()
@@ -228,6 +230,7 @@ namespace HospitalSimulation
             int lowestRoomtime;
             int lowestRoomtimeN;
             int num = 1;
+            int rollOver;
             //Pregenerate patients
             for (float j = 0; j <= shiftLen * 60;)
             {
@@ -246,29 +249,41 @@ namespace HospitalSimulation
                 lowestRoomtimeN = 100000;
                 for (int i=1; i <= numRooms; i++)
                 {
-                    if(patients.GetPatient(i).GetDelayTime() <= shift)
+                    if(patients.GetPatient(i)!= null)
                     {
-                        if(patients.GetPatient(i).GetDelayTime()<shift&& patients.GetPatient(i).GetDelayTime() < shift - lowestRoomtime)
+                        if (patients.GetPatient(i).GetDelayTime() <= shift)
                         {
-                            patients.GetPatient(i).roomTime -= 100;//shift - patients.GetPatient(i).GetDelayTime();
-                        }
-                        patients.GetPatient(i).roomTime -= lowestRoomtime;
-
-                        //Creates inacuracies if value is less than zero as that is not propogated forward
-                        if (patients.GetPatient(i).roomTime <= 0)
-                        {
-                            if(patients.GetPatient(i).roomTime < 0 && patients.GetPatient(numRooms+1).GetDelayTime() < shift)
+                            if (patients.GetPatient(i).GetDelayTime() < shift && patients.GetPatient(i).GetDelayTime() < shift - lowestRoomtime)
                             {
-                                patients.GetPatient(i).AddWaitLength(100);//shift - patients.GetPatient(numRooms + 1).GetDelayTime());
+                                patients.GetPatient(i).roomTime -= (int)(shift - patients.GetPatient(i).GetDelayTime());
                             }
-                            patients.RemovePatient(i);
-                            
-                        }
-                        if (patients.GetPatient(i).roomTime < lowestRoomtimeN)
-                        {
-                            lowestRoomtimeN = patients.GetPatient(i).roomTime;
+                            patients.GetPatient(i).roomTime -= lowestRoomtime;
+
+                            //Creates inacuracies if value is less than zero as that is not propogated forward
+                            if (patients.GetPatient(i).roomTime <= 0)
+                            {
+
+                                if (patients.GetPatient(numRooms + 1) != null)
+                                {
+                                    rollOver = patients.GetPatient(i).roomTime;
+                                    patients.RemovePatient(i);
+                                    patients.GetPatient(i).AddWaitLength(rollOver);
+                                }
+                                else
+                                {
+                                    patients.RemovePatient(i);
+                                }
+                            }
+                            if (patients.GetPatient(i) != null)
+                            {
+                                if (patients.GetPatient(i).roomTime < lowestRoomtimeN)
+                                {
+                                    lowestRoomtimeN = patients.GetPatient(i).roomTime;
+                                }
+                            }
                         }
                     }
+                    
                 }
                 
 
