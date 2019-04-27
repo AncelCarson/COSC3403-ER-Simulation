@@ -2,9 +2,9 @@
 
 public class Patient
 {
+    public int roomTime;
     private int 
         rating, 
-        roomTime,
         arrivalTime,
         waitLength,
         priorityNum;
@@ -50,6 +50,10 @@ public class Patient
     public int GetPriorityNum()
     {
         return priorityNum;
+    }
+    public void AddWaitLength(int time)
+    {
+        waitLength += time;
     }
 
     //sets the time the patient arrived at the hospital
@@ -111,6 +115,6 @@ public class Patient
     private void SetDelayTime(ref float[] waitDelays)
     {
         float totalDelay = waitDelays[1] - waitDelays[0];
-        delayTime = totalDelay * (rnd.Next(100) / (float)100.0);
+        delayTime = (totalDelay * (rnd.Next(100) / (float)100.0));
     }
 }

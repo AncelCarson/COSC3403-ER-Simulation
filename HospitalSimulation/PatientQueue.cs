@@ -15,7 +15,7 @@ namespace HospitalSimulation
         private Patient tempP;
         private int rooms;
 
-        PatientQueue(int rooms)
+        public PatientQueue(int rooms)
         {
             this.rooms = rooms;
             size = 50;
@@ -61,6 +61,11 @@ namespace HospitalSimulation
             {
                 queue[i] = tempQ[i];
             }
+        }
+
+        public int GetSize()
+        {
+            return size;
         }
 
         public Patient GetPatient (int position)
