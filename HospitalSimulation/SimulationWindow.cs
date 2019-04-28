@@ -12,10 +12,10 @@ namespace HospitalSimulation
 {
     public partial class SimulationWindow : Form
     {
-        int numRooms, shiftLength, tick = 0, timeNext = 0, patientWait = 0;
-        int[] severityRatings, roomTimes, closeWait = new int[4];
-        float[] waitDelays;
-        Boolean simRun = true, makePatients = true, midSaved = false;
+        private int numRooms, shiftLength, tick = 0, timeNext = 0, patientWait = 0;
+        private int[] severityRatings, roomTimes, closeWait = new int[4];
+        private float[] waitDelays;
+        private Boolean simRun = true, makePatients = true, midSaved = false;
         private TableLayoutPanel[] Rooms = new TableLayoutPanel[15];
         private Label[] PatientNum = new Label[15];
         private Label[] PatientRating = new Label[15];
@@ -159,7 +159,6 @@ namespace HospitalSimulation
                     Timer1.Stop();
                 }
             }
-
             patientWait = RatingLine[0].Count + RatingLine[1].Count + RatingLine[2].Count + RatingLine[3].Count;
             SortPatients();
             UpdateText();
