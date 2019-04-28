@@ -33,19 +33,7 @@ namespace HospitalSimulation
             delayAverage = ((delayMin + delayMax) / 2);
             AverageDelay.Text = delayAverage.ToString("n2");
             shiftLength.Enabled = true;
-            numRooms = RoomDropDown.SelectedIndex;
-            shiftLen = (int)shiftLength.Value;
-            severityRatings[0] = (int)Severity1Percent.Value;
-            severityRatings[1] = (int)Severity2Percent.Value;
-            severityRatings[2] = (int)Severity3Percent.Value;
-            severityRatings[3] = (int)Severity4Percent.Value;
-            roomTimes[0] = (int)Severity1RoomWait.Value;
-            roomTimes[1] = (int)Severity2RoomWait.Value;
-            roomTimes[2] = (int)Severity3RoomWait.Value;
-            roomTimes[3] = (int)Severity4RoomWait.Value;
-            waitDelays[0] = delayMin;
-            waitDelays[1] = delayMax;
-            waitDelays[2] = delayAverage;
+
             /*
             Label[] PercentChance = new Label[4];
             PercentChance[0] = PercentChance1;
@@ -185,6 +173,7 @@ namespace HospitalSimulation
 
         private void TimedSimButton_Click(object sender, EventArgs e)
         {
+            UpdateSentValues();
             if (CheckChances())
             {
                 simulation = new SimulationWindow(numRooms, shiftLen, severityRatings, roomTimes, waitDelays);
@@ -194,6 +183,7 @@ namespace HospitalSimulation
 
         public void InstantSimButton_Click(object sender, EventArgs e)
         {
+            UpdateSentValues();
             patients = new PatientQueue(numRooms);
             InstantSimulation(ref(patients));
             if (CheckChances())
@@ -305,6 +295,23 @@ namespace HospitalSimulation
             //While loop check if still patients
                 //Same operations as run shift
             
+        }
+
+        private void UpdateSentValues()
+        {
+            numRooms = RoomDropDown.SelectedIndex;
+            shiftLen = (int)shiftLength.Value;
+            severityRatings[0] = (int)Severity1Percent.Value;
+            severityRatings[1] = (int)Severity2Percent.Value;
+            severityRatings[2] = (int)Severity3Percent.Value;
+            severityRatings[3] = (int)Severity4Percent.Value;
+            roomTimes[0] = (int)Severity1RoomWait.Value;
+            roomTimes[1] = (int)Severity2RoomWait.Value;
+            roomTimes[2] = (int)Severity3RoomWait.Value;
+            roomTimes[3] = (int)Severity4RoomWait.Value;
+            waitDelays[0] = delayMin;
+            waitDelays[1] = delayMax;
+            waitDelays[2] = delayAverage;
         }
     }
 }

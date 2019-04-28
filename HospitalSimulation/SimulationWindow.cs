@@ -12,10 +12,10 @@ namespace HospitalSimulation
 {
     public partial class SimulationWindow : Form
     {
-        int numRooms, shiftLength, tick = 0;
-        int[] severityRatings, roomTimes;
+        int numRooms, shiftLength, tick = 0, timeNext = 0, patientWait = 0;
+        int[] severityRatings, roomTimes, closeWait = new int[4];
         float[] waitDelays;
-        Boolean simRun = true, makePatients = true, midSave = false;
+        Boolean simRun = true, makePatients = true, midSaved = false;
         private TableLayoutPanel[] Rooms = new TableLayoutPanel[15];
         private Label[] PatientNum = new Label[15];
         private Label[] PatientRating = new Label[15];
@@ -56,6 +56,10 @@ namespace HospitalSimulation
 
         private void SetupItems()
         {
+            for(int i = 0; i < 4; i++)
+            {
+                RatingLine[i] = new Queue<Patient>();
+            }
             SetDispText();
             SetGroups();
             OpenRooms(numRooms);
@@ -134,7 +138,7 @@ namespace HospitalSimulation
         {
             if (makePatients)
             {
-                Patient newPatient = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
+                GetPatients();
             }
 
             if (tick < (shiftLength * 600))
@@ -144,26 +148,61 @@ namespace HospitalSimulation
             else
             {
                 TimeCompleteProgress.Value = 100;
-                if (!midSave)
+                if (!midSaved)
                 {
                     AfterShift();
                 }
+                makePatients = false;
+
+                if(patientWait == 0)
+                {
+                    Timer1.Stop();
+                }
             }
+
+            patientWait = RatingLine[0].Count + RatingLine[1].Count + RatingLine[2].Count + RatingLine[3].Count;
+            SortPatients();
+            UpdateText();
             tick++;
+        }
+
+        private void GetPatients()
+        {
+            if (tick >= timeNext)
+            {
+                Patient newPatient = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
+                switch (newPatient.GetRating())
+                {
+                    case 1: RatingLine[0].Enqueue(newPatient); break;
+                    case 2: RatingLine[1].Enqueue(newPatient); break;
+                    case 3: RatingLine[2].Enqueue(newPatient); break;
+                    case 4: RatingLine[3].Enqueue(newPatient); break;
+                }
+                timeNext = tick + (int)(newPatient.GetDelayTime() * 10);
+            }
+        }
+
+        private void SortPatients()
+        {
+
         }
 
         private void AfterShift()
         {
-            midSave = true;
+            midSaved = true;
+            for(int i = 0; i < 4; i++)
+            {
+                closeWait[i] = RatingLine[i].Count;
+            }
         }
 
         public void UpdateText()
         {
-            //AveWait1.Text = "Severity rating 1: " + AveWait[0];
-            //AveWait2.Text = "Severity rating 2: " + AveWait[1];
-            //AveWait3.Text = "Severity rating 3: " + AveWait[2];
-            //AveWait4.Text = "Severity rating 4: " + AveWait[3];
-            //PatientWaitLabel.Text = "Number of patients waiting: " + (RatingLine[0].Count + RatingLine[1].Count + RatingLine[2].Count + RatingLine[3].Count);
+            for(int i = 0; i < 4; i++)
+            {
+                AveWait[i].Text = "Severity rating " + (i+1) + ": " + 0;
+            }
+            PatientWaitLabel.Text = "Number of patients waiting: " + patientWait;
         }
     }
 }

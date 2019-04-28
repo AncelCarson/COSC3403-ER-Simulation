@@ -115,6 +115,6 @@ public class Patient
     private void SetDelayTime(ref float[] waitDelays)
     {
         float totalDelay = waitDelays[1] - waitDelays[0];
-        delayTime = (totalDelay * (rnd.Next(100) / (float)100.0));
+        delayTime = waitDelays[0] + (totalDelay * (rnd.Next(100) / (float)100.0));
     }
 }
