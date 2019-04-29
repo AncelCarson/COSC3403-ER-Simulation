@@ -78,7 +78,6 @@
             this.Rating1Count.Size = new System.Drawing.Size(239, 25);
             this.Rating1Count.TabIndex = 3;
             this.Rating1Count.Text = "10 patients of rating type 1";
-            this.Rating1Count.Click += new System.EventHandler(this.label4_Click);
             // 
             // Rating2Count
             // 

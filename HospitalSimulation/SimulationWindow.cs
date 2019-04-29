@@ -12,20 +12,39 @@ namespace HospitalSimulation
 {
     public partial class SimulationWindow : Form
     {
-        private int numRooms, shiftLength, tick = 0, timeNext = 0, patientWait = 0;
-        private int[] severityRatings, roomTimes, closeWait = new int[4];
-        private float[] waitDelays;
-        private Boolean simRun = true, makePatients = true, midSaved = false;
+        private static int totalSimulations;
+        private int simID,
+            numRooms, 
+            shiftLength, 
+            tick = 0, 
+            timeNext = 0, 
+            patientWait = 0, 
+            patientsMade = 0,
+            tempPatientRating = 0,
+            openRooms = 0;
+        private int[] severityRatings, 
+            roomTimes, 
+            closeWait = new int[4],
+            numRatings = new int[4],
+            totalRatingWaits = new int[4];
+        private float[] waitDelays,
+            aveRatingsWait = new float[4];
+        private Boolean simRun = true, 
+            makePatients = true, 
+            patientAdded = false, 
+            midSaved = false;
         private TableLayoutPanel[] Rooms = new TableLayoutPanel[15];
         private Label[] PatientNum = new Label[15];
         private Label[] PatientRating = new Label[15];
         private Label[] AveWait = new Label[4];
-        Queue<Patient>[] RatingLine = new Queue<Patient>[4];
+        private Patient[] room;
+        private Queue<Patient>[] RatingLine = new Queue<Patient>[4];
 
         public SimulationWindow()
         {
             InitializeComponent();
             SetGroups();
+            totalSimulations++;
 
             Room1Panel.Visible = true;
             Room2Panel.Visible = true;
@@ -44,18 +63,35 @@ namespace HospitalSimulation
 
         public SimulationWindow(int rooms, int shiftLen, int[] ratings, int[] times, float[] delays)
         {
+            severityRatings = new int[ratings.Length];
+            for (int i = 0; i < ratings.Length; i++)
+            {
+                severityRatings[i] = ratings[i];
+            }
+
+            roomTimes = new int[times.Length];
+            for (int i = 0; i < times.Length; i++)
+            {
+                roomTimes[i] = times[i];
+            }
+
+            waitDelays = new float[delays.Length];
+            for (int i = 0; i < delays.Length; i++)
+            {
+                waitDelays[i] = delays[i];
+            }
             numRooms = rooms;
             shiftLength = shiftLen;
-            severityRatings = ratings;
-            roomTimes = times;
-            waitDelays = delays;
             InitializeComponent();
+            totalSimulations++;
+            simID = totalSimulations;
             SetupItems();
             Timer1.Start();
         }
 
         private void SetupItems()
         {
+            room = new Patient[numRooms];
             for(int i = 0; i < 4; i++)
             {
                 RatingLine[i] = new Queue<Patient>();
@@ -68,6 +104,7 @@ namespace HospitalSimulation
         private void SetDispText()
         {
             ShiftLengthLabel.Text = "Progress of " + shiftLength + " hour shift";
+            this.Text = "Simulation Window " + simID;
         }
 
         private void SetGroups()
@@ -128,7 +165,7 @@ namespace HospitalSimulation
 
         private void OpenRooms(int numRooms)
         {
-            for (int i = 0; i <= numRooms; i++)
+            for (int i = 0; i < numRooms; i++)
             {
                 Rooms[i].Visible = true;
             }
@@ -157,6 +194,15 @@ namespace HospitalSimulation
                 if(patientWait == 0)
                 {
                     Timer1.Stop();
+                    for (int i = 0; i < numRooms; i++)
+                    {
+                        if (room[i] == null)
+                        {
+                            openRooms++;
+                        }
+                    }
+                    Results results = new Results(shiftLength, closeWait, tick, aveRatingsWait, openRooms, simID);
+                    results.Show();
                 }
             }
             patientWait = RatingLine[0].Count + RatingLine[1].Count + RatingLine[2].Count + RatingLine[3].Count;
@@ -169,7 +215,9 @@ namespace HospitalSimulation
         {
             if (tick >= timeNext)
             {
-                Patient newPatient = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
+                patientsMade++;
+                Patient newPatient = new Patient(ref severityRatings, ref roomTimes, ref waitDelays, patientsMade);
+                newPatient.SetArrivalTime(ref tick);
                 switch (newPatient.GetRating())
                 {
                     case 1: RatingLine[0].Enqueue(newPatient); break;
@@ -183,7 +231,65 @@ namespace HospitalSimulation
 
         private void SortPatients()
         {
+            for(int i = 0; i < numRooms; i++)
+            {
+                if (room[i] == null)
+                {
+                    room[i] = new Patient(true);
+                    Rooms[i].Enabled = false;
+                }
 
+                if (room[i].TimeUp(tick))
+                {
+
+                    Rooms[i].Enabled = false;
+                    if(RatingLine[3].Count > 0)
+                    {
+                        room[i] = RatingLine[3].Dequeue();
+                        patientAdded = true;
+                    }
+                    else if(RatingLine[0].Count > 0 || RatingLine[1].Count > 0 || RatingLine[2].Count > 0)
+                    {
+                        switch (getPriority())
+                        {
+                            case 1: room[i] = RatingLine[0].Dequeue(); break;
+                            case 2: room[i] = RatingLine[1].Dequeue(); break;
+                            case 3: room[i] = RatingLine[2].Dequeue(); break;
+                        }
+                        patientAdded = true;
+                    }
+
+                    if (room[i] != null)
+                    {
+
+                        //Checks that a Patient was added
+                        if (patientAdded)
+                        {
+
+                            //Tells Patient it has been roomed
+                            room[i].Roomed(ref tick);
+                            Rooms[i].Enabled = true;
+                            PatientNum[i].Text = "Patient #: " + room[i].GetPatientNum();
+                            PatientRating[i].Text = "Patient rating: " + room[i].GetRating();
+
+
+                            //Retrieves rating of Patient in current room
+                            tempPatientRating = room[i].GetRating();
+
+                            ////Adds wait of current patient to total for that rating
+                            totalRatingWaits[tempPatientRating - 1] = totalRatingWaits[tempPatientRating - 1] + (int)room[i].GetWaitTime(ref tick);
+
+                            ////Increases count of patients of rating type roomed
+                            numRatings[tempPatientRating - 1]++;
+
+                            aveRatingsWait[tempPatientRating - 1] = (totalRatingWaits[tempPatientRating - 1] / numRatings[tempPatientRating - 1])/10;
+
+                            //Says Patient has been delt with
+                            patientAdded = false;
+                        }
+                    }
+                }
+            }
         }
 
         private void AfterShift()
@@ -199,9 +305,51 @@ namespace HospitalSimulation
         {
             for(int i = 0; i < 4; i++)
             {
-                AveWait[i].Text = "Severity rating " + (i+1) + ": " + 0;
+                AveWait[i].Text = "Severity rating " + (i+1) + ": " + aveRatingsWait[i].ToString("n2");
             }
             PatientWaitLabel.Text = "Number of patients waiting: " + patientWait;
+        }
+
+        private int getPriority()
+        {
+            int priority = 3,          //Default priority
+                currentTick = tick;    //Time when method was called
+            double priority1 = 0,      //Priority value of Patient 1
+                   priority2 = 0,      //Priority value of Patient 2
+                   priority3 = 0;      //Priority Value of Patient 3
+
+            if (RatingLine[0].Count != 0)
+            {
+                priority1 = RatingLine[0].Peek().GetPriority(currentTick + 1);  //Sets priority value of Patient 1
+            }
+            if (RatingLine[1].Count != 0)
+            {
+                priority2 = RatingLine[1].Peek().GetPriority(currentTick + 1);  //Sets priority value of Patient 1
+            }
+            if (RatingLine[2].Count != 0)
+            {
+                priority3 = RatingLine[2].Peek().GetPriority(currentTick + 1);  //Sets priority value of Patient 1
+            }
+
+            //Logic for determining which Patient has highest priority
+            if (priority2 > priority3)
+            {
+                priority = 2;                    //Sets Priority to queue 2
+                if (priority1 > priority2)
+                {
+                    priority = 1;                 //Sets proirity to queue 1
+                }
+            }
+
+            if (priority1 > priority3)
+            {
+                priority = 1;                    //Sets priority to queue 1
+                if (priority2 > priority1)
+                {
+                    priority = 2;                 //Sets proiority to queue 2
+                }
+            }
+            return priority;                    //Returns queue with highest priority
         }
     }
 }

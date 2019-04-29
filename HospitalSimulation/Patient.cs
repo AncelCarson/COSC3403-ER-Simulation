@@ -6,8 +6,10 @@ public class Patient
     private int 
         rating, 
         arrivalTime,
+        roomedTime,
         waitLength,
-        priorityNum;
+        priorityNum,
+        patientNumber;
     private static int totalPatientNum;
     private float delayTime;
     Random rnd = new Random();
@@ -20,12 +22,30 @@ public class Patient
         totalPatientNum++;
 	}
 
+    public Patient(Boolean createNew)
+    {
+        rating = 0;
+        roomTime = 0;
+        waitLength = 0;
+        delayTime = 0;
+    }
+
     //Constructor used to crete random patient
     public Patient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays)
     {
         SetRating(ref severityRatings);
         SetRoomTime(ref roomTimes);
         SetDelayTime(ref waitDelays);
+        totalPatientNum++;
+    }
+
+    public Patient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays, int patientNumber)
+    {
+        SetRating(ref severityRatings);
+        SetRoomTime(ref roomTimes);
+        SetDelayTime(ref waitDelays);
+        totalPatientNum++;
+        this.patientNumber = patientNumber;
     }
 
     //returns rating of patient
@@ -43,6 +63,11 @@ public class Patient
     //returns patient number by when it arrived
     public int GetPatientNum()
     {
+        return patientNumber;
+    }
+
+    public int GetTotalPatients()
+    {
         return totalPatientNum;
     }
 
@@ -51,6 +76,17 @@ public class Patient
     {
         return priorityNum;
     }
+
+    public int GetPriority(int localTime)
+    {
+        return (localTime - arrivalTime) * rating;
+    }
+
+    public int GetWaitTime(ref int localTime)
+    {
+        return localTime - arrivalTime;
+    }
+
     public void AddWaitLength(int time)
     {
         waitLength += time;
@@ -66,7 +102,20 @@ public class Patient
     public int Roomed(ref int localTime)
     {
         waitLength = localTime - arrivalTime;
+        roomedTime = localTime;
         return roomTime;
+    }
+
+    public Boolean TimeUp(int localTime)
+    {
+        if(localTime > (roomedTime + (roomTime * 10)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     //randomly assigns a rating to the patient
@@ -77,7 +126,7 @@ public class Patient
         {
             if (rand < severityRatings[i])
             {
-                rating = i;
+                rating = (i + 1);
                 break;
             }
             else rand -= severityRatings[i];

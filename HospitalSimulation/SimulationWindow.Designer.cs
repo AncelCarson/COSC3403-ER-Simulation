@@ -1019,6 +1019,9 @@
             this.Controls.Add(this.ShiftLengthLabel);
             this.Controls.Add(this.RoomsPanel);
             this.Controls.Add(this.TimeCompleteProgress);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SimulationWindow";
             this.Text = "SimulationWindow";
             this.RoomsPanel.ResumeLayout(false);
