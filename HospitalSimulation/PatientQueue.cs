@@ -140,19 +140,19 @@ namespace HospitalSimulation
         public float GetAvgWait1()
         {
 
-            return (wait1/60) / rat1;
+            return (wait1) / rat1;
         }
         public float GetAvgWait2()
         {
-            return (wait2/60) / rat2;
+            return (wait2) / rat2;
         }
         public float GetAvgWait3()
         {
-            return (wait3/60) / rat3;
+            return (wait3) / rat3;
         }
         public float GetAvgWait4()
         {
-            return (wait4/60) / rat4;
+            return (wait4) / rat4;
         }
 
     }

@@ -280,7 +280,7 @@ namespace HospitalSimulation
                                 {
                                     rollOver = patients.GetPatient(i).roomTime;
                                     patients.RemovePatient(i);
-                                    patients.GetPatient(i).AddWaitLength(rollOver);
+                                    patients.GetPatient(i).AddWaitLength(rollOver*-1);
                                     numPatients--;
                                 }
                                 else
@@ -307,6 +307,7 @@ namespace HospitalSimulation
                     if (patients.GetPatient(i).GetDelayTime() <= shift)
                     {
                         patients.GetPatient(i).AddWaitLength(lowestRoomtime);
+                        System.Diagnostics.Debug.WriteLine(patients.GetPatient(i).GetWaitLength().ToString());
                     }
                 }
 
@@ -356,7 +357,7 @@ namespace HospitalSimulation
                                 {
                                     rollOver = patients.GetPatient(i).roomTime;
                                     patients.RemovePatient(i);
-                                    patients.GetPatient(i).AddWaitLength(rollOver);
+                                    patients.GetPatient(i).AddWaitLength(rollOver*-1);
                                     numPatients--;
                                 }
                                 else
@@ -383,6 +384,7 @@ namespace HospitalSimulation
                     if (patients.GetPatient(i).GetDelayTime() <= shift)
                     {
                         patients.GetPatient(i).AddWaitLength(lowestRoomtime);
+                        System.Diagnostics.Debug.WriteLine(patients.GetPatient(i).GetWaitLength().ToString());
                     }
                 }
 
