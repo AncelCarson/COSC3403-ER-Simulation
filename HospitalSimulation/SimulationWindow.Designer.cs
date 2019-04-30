@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SimulationWindow));
             this.TimeCompleteProgress = new System.Windows.Forms.ProgressBar();
             this.RoomsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.Room15Panel = new System.Windows.Forms.TableLayoutPanel();
@@ -1020,6 +1021,7 @@
             this.Controls.Add(this.RoomsPanel);
             this.Controls.Add(this.TimeCompleteProgress);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SimulationWindow";

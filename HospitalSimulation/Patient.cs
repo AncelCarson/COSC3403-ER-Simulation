@@ -12,7 +12,7 @@ public class Patient
         patientNumber;
     private static int totalPatientNum;
     private float delayTime;
-    Random rnd = new Random();
+    Random rnd;
 
     //Default constructor 
     public Patient()
@@ -31,16 +31,18 @@ public class Patient
     }
 
     //Constructor used to crete random patient
-    public Patient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays)
+    public Patient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays, ref Random rnd)
     {
+        this.rnd = rnd;
         SetRating(ref severityRatings);
         SetRoomTime(ref roomTimes);
         SetDelayTime(ref waitDelays);
         totalPatientNum++;
     }
 
-    public Patient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays, int patientNumber)
+    public Patient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays, int patientNumber, ref Random rnd)
     {
+        this.rnd = rnd;
         SetRating(ref severityRatings);
         SetRoomTime(ref roomTimes);
         SetDelayTime(ref waitDelays);

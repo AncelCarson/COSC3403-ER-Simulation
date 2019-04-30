@@ -15,7 +15,6 @@ namespace HospitalSimulation
         private static int totalSimulations;
         private int simID,
             numRooms, 
-             
             tick = 0, 
             timeNext = 0, 
             patientWait = 0, 
@@ -40,6 +39,7 @@ namespace HospitalSimulation
         private Label[] AveWait = new Label[4];
         private Patient[] room;
         private Queue<Patient>[] RatingLine = new Queue<Patient>[4];
+        Random rnd;
 
         public SimulationWindow()
         {
@@ -62,7 +62,7 @@ namespace HospitalSimulation
             results.Show();
         }
 
-        public SimulationWindow(int rooms, float shiftLen, int[] ratings, int[] times, float[] delays)
+        public SimulationWindow(int rooms, float shiftLen, int[] ratings, int[] times, float[] delays, ref Random rnd)
         {
             severityRatings = new int[ratings.Length];
             for (int i = 0; i < ratings.Length; i++)
@@ -87,6 +87,7 @@ namespace HospitalSimulation
             totalSimulations++;
             simID = totalSimulations;
             SetupItems();
+            this.rnd = rnd;
             Timer1.Start();
         }
 
@@ -223,7 +224,7 @@ namespace HospitalSimulation
             if (tick >= timeNext)
             {
                 patientsMade++;
-                Patient newPatient = new Patient(ref severityRatings, ref roomTimes, ref waitDelays, patientsMade);
+                Patient newPatient = new Patient(ref severityRatings, ref roomTimes, ref waitDelays, patientsMade, ref rnd);
                 newPatient.SetArrivalTime(ref tick);
                 switch (newPatient.GetRating())
                 {

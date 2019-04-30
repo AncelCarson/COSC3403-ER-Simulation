@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrontPanel));
             this.InstantSimButton = new System.Windows.Forms.Button();
             this.TimedSimButton = new System.Windows.Forms.Button();
             this.ChangeAveDelay = new System.Windows.Forms.CheckBox();
@@ -557,6 +558,7 @@
             this.Controls.Add(this.InstantSimButton);
             this.Controls.Add(this.topMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.topMenu;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;

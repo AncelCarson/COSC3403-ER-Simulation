@@ -25,6 +25,7 @@ namespace HospitalSimulation
         Results results;
         PatientQueue patients;
         int instantSimNum=0;
+        Random rnd = new Random();
 
         public FrontPanel()
         {
@@ -179,7 +180,7 @@ namespace HospitalSimulation
             UpdateSentValues();
             if (CheckValues())
             {
-                simulation = new SimulationWindow(numRooms, shiftLen, severityRatings, roomTimes, waitDelays);
+                simulation = new SimulationWindow(numRooms, shiftLen, severityRatings, roomTimes, waitDelays, ref rnd);
                 simulation.Show();
             }
         }
@@ -189,7 +190,7 @@ namespace HospitalSimulation
             UpdateSentValues();
             if (CheckValues())
             {
-                patients = new PatientQueue(numRooms);
+                patients = new PatientQueue(numRooms, ref rnd);
                 InstantSimulation(ref (patients));
             }
         }

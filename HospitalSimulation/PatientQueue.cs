@@ -23,13 +23,15 @@ namespace HospitalSimulation
         private float wait2 = 0;
         private float wait3 = 0;
         private float wait4 = 0;
+        private Random rnd;
 
-        public PatientQueue(int rooms)
+        public PatientQueue(int rooms, ref Random rnd)
         {
             this.rooms = rooms;
             size = 50;
             index = 0;
             queue = new Patient[size];
+            this.rnd = rnd;
         }
 
         public Patient AddPatient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays)
@@ -44,18 +46,18 @@ namespace HospitalSimulation
                 {
                     if (queue[i] == null)
                     {
-                        queue[i] = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
+                        queue[i] = new Patient(ref severityRatings, ref roomTimes, ref waitDelays, ref rnd);
                         return queue[index];
                     }
                 }
 
-                queue[index] = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
+                queue[index] = new Patient(ref severityRatings, ref roomTimes, ref waitDelays, ref rnd);
                 index++;
                 return queue[index];
             }
             else
             {
-                queue[index] = new Patient(ref severityRatings, ref roomTimes, ref waitDelays);
+                queue[index] = new Patient(ref severityRatings, ref roomTimes, ref waitDelays, ref rnd);
                 index++;
                 return queue[index];
             }
