@@ -13,14 +13,16 @@ namespace HospitalSimulation
     public partial class FrontPanel : Form
     {
         int numRooms;
-        int[] severityRatings = new int[4];
-        int[] roomTimes = new int[4];
-        float delayMin, delayMax, delayAverage;
+        int[] severityRatings = new int[4],
+            roomTimes = new int[4];
+        float delayMin, 
+            delayMax, 
+            delayAverage, 
+            shiftLen;
         float[] waitDelays = new float[3];
         HelpForm help;
         SimulationWindow simulation;
         Results results;
-        int shiftLen;
         PatientQueue patients;
 
         public FrontPanel()
@@ -156,7 +158,7 @@ namespace HospitalSimulation
 
         private void shiftLength_ValueChanged(object sender, EventArgs e)
         {
-            shiftLen = (int)shiftLength.Value;
+            shiftLen = (float)shiftLength.Value;
         }
 
         private void HelpButton_Click(object sender, EventArgs e)
@@ -174,7 +176,7 @@ namespace HospitalSimulation
         private void TimedSimButton_Click(object sender, EventArgs e)
         {
             UpdateSentValues();
-            if (CheckChances())
+            if (CheckValues())
             {
                 simulation = new SimulationWindow(numRooms, shiftLen, severityRatings, roomTimes, waitDelays);
                 simulation.Show();
@@ -186,7 +188,7 @@ namespace HospitalSimulation
             UpdateSentValues();
             patients = new PatientQueue(numRooms);
             InstantSimulation(ref(patients));
-            if (CheckChances())
+            if (CheckValues())
             {
                 results = new Results();
                 results.Show();
@@ -198,7 +200,7 @@ namespace HospitalSimulation
             Close();
         }
 
-        private Boolean CheckChances()
+        private Boolean CheckValues()
         {
             int totalChance = 0;
             for (int i = 0; i <= 3; i++)
@@ -208,6 +210,12 @@ namespace HospitalSimulation
             if (totalChance != 100)
             {
                 MessageBox.Show("Chance values must add to 100.", "Check values and try again");
+                return false;
+            }
+
+            if(waitDelays[0] > waitDelays[1])
+            {
+                MessageBox.Show("Delay values must be formatted minimum then maximum.", "Check values and try again");
                 return false;
             }
             return true;
@@ -300,7 +308,7 @@ namespace HospitalSimulation
         private void UpdateSentValues()
         {
             numRooms = RoomDropDown.SelectedIndex + 1;
-            shiftLen = (int)shiftLength.Value;
+            shiftLen = (float)shiftLength.Value;
             severityRatings[0] = (int)Severity1Percent.Value;
             severityRatings[1] = (int)Severity2Percent.Value;
             severityRatings[2] = (int)Severity3Percent.Value;

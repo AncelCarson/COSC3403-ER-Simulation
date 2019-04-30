@@ -12,8 +12,8 @@ namespace HospitalSimulation
 {
     public partial class Results : Form
     {
-        Label[] AveWait = new Label[4];
-        Label[] RatingCount = new Label[4];
+        Label[] AveWait = new Label[4],
+            RatingCount = new Label[4];
 
         public Results()
         {
@@ -21,7 +21,7 @@ namespace HospitalSimulation
             SetGroups();
         }
 
-        public Results(int shiftLen, int[] closeWait, int closeTime, float[] aveWaits, int openRooms, int simNum)
+        public Results(float shiftLen, int[] closeWait, int closeTime, float[] aveWaits, int openRooms, int simNum)
         {
             InitializeComponent();
             SetGroups();
@@ -31,7 +31,7 @@ namespace HospitalSimulation
             RatingCount[1].Text = closeWait[1] + " patients of rating type 2";
             RatingCount[2].Text = closeWait[2] + " patients of rating type 3";
             RatingCount[3].Text = closeWait[3] + " patients of rating type 4";
-            ExtraTimeLabel.Text = "It took " + ((closeTime/600) - shiftLen).ToString("n2") + " hours to room the remaining patients";
+            ExtraTimeLabel.Text = "It took " + (((float)closeTime/600) - (float)shiftLen).ToString("n2") + " hours to room the remaining patients";
             AveWait[0].Text = "Average wait time for rating 1: " + aveWaits[0].ToString("n2") + " minutes";
             AveWait[1].Text = "Average wait time for rating 2: " + aveWaits[1].ToString("n2") + " minutes";
             AveWait[2].Text = "Average wait time for rating 3: " + aveWaits[2].ToString("n2") + " minutes";

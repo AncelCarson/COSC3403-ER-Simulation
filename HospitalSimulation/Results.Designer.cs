@@ -179,6 +179,7 @@
             this.Controls.Add(this.ShiftTimeLabel);
             this.Controls.Add(this.ExtraTimeLabel);
             this.Name = "Results";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Results";
             this.ResumeLayout(false);
             this.PerformLayout();

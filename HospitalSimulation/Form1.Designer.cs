@@ -81,7 +81,7 @@
             // InstantSimButton
             // 
             this.InstantSimButton.Location = new System.Drawing.Point(383, 428);
-            this.InstantSimButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.InstantSimButton.Margin = new System.Windows.Forms.Padding(4);
             this.InstantSimButton.Name = "InstantSimButton";
             this.InstantSimButton.Size = new System.Drawing.Size(244, 57);
             this.InstantSimButton.TabIndex = 1;
@@ -92,7 +92,7 @@
             // TimedSimButton
             // 
             this.TimedSimButton.Location = new System.Drawing.Point(110, 428);
-            this.TimedSimButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TimedSimButton.Margin = new System.Windows.Forms.Padding(4);
             this.TimedSimButton.Name = "TimedSimButton";
             this.TimedSimButton.Size = new System.Drawing.Size(260, 57);
             this.TimedSimButton.TabIndex = 2;
@@ -105,7 +105,7 @@
             this.ChangeAveDelay.AutoSize = true;
             this.ChangeAveDelay.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ChangeAveDelay.Location = new System.Drawing.Point(20, 85);
-            this.ChangeAveDelay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ChangeAveDelay.Margin = new System.Windows.Forms.Padding(4);
             this.ChangeAveDelay.Name = "ChangeAveDelay";
             this.ChangeAveDelay.Size = new System.Drawing.Size(284, 29);
             this.ChangeAveDelay.TabIndex = 3;
@@ -126,22 +126,24 @@
             // DelayMinValue
             // 
             this.DelayMinValue.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DelayMinValue.DecimalPlaces = 1;
             this.DelayMinValue.Enabled = false;
             this.DelayMinValue.Location = new System.Drawing.Point(20, 120);
-            this.DelayMinValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DelayMinValue.Margin = new System.Windows.Forms.Padding(4);
             this.DelayMinValue.Name = "DelayMinValue";
-            this.DelayMinValue.Size = new System.Drawing.Size(68, 29);
+            this.DelayMinValue.Size = new System.Drawing.Size(75, 29);
             this.DelayMinValue.TabIndex = 5;
             this.DelayMinValue.ValueChanged += new System.EventHandler(this.DelayMinValue_ValueChanged);
             // 
             // DelayMaxValue
             // 
             this.DelayMaxValue.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DelayMaxValue.DecimalPlaces = 1;
             this.DelayMaxValue.Enabled = false;
-            this.DelayMaxValue.Location = new System.Drawing.Point(95, 120);
-            this.DelayMaxValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DelayMaxValue.Location = new System.Drawing.Point(103, 120);
+            this.DelayMaxValue.Margin = new System.Windows.Forms.Padding(4);
             this.DelayMaxValue.Name = "DelayMaxValue";
-            this.DelayMaxValue.Size = new System.Drawing.Size(68, 29);
+            this.DelayMaxValue.Size = new System.Drawing.Size(75, 29);
             this.DelayMaxValue.TabIndex = 6;
             this.DelayMaxValue.Value = new decimal(new int[] {
             15,
@@ -175,7 +177,7 @@
             this.ChangeNumRooms.AutoSize = true;
             this.ChangeNumRooms.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ChangeNumRooms.Location = new System.Drawing.Point(326, 85);
-            this.ChangeNumRooms.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ChangeNumRooms.Margin = new System.Windows.Forms.Padding(4);
             this.ChangeNumRooms.Name = "ChangeNumRooms";
             this.ChangeNumRooms.Size = new System.Drawing.Size(269, 29);
             this.ChangeNumRooms.TabIndex = 9;
@@ -205,7 +207,7 @@
             "14",
             "15"});
             this.RoomDropDown.Location = new System.Drawing.Point(326, 116);
-            this.RoomDropDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RoomDropDown.Margin = new System.Windows.Forms.Padding(4);
             this.RoomDropDown.Name = "RoomDropDown";
             this.RoomDropDown.Size = new System.Drawing.Size(121, 32);
             this.RoomDropDown.TabIndex = 10;
@@ -216,7 +218,7 @@
             this.ChangeFreqPercent.AutoSize = true;
             this.ChangeFreqPercent.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ChangeFreqPercent.Location = new System.Drawing.Point(20, 175);
-            this.ChangeFreqPercent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ChangeFreqPercent.Margin = new System.Windows.Forms.Padding(4);
             this.ChangeFreqPercent.Name = "ChangeFreqPercent";
             this.ChangeFreqPercent.Size = new System.Drawing.Size(279, 29);
             this.ChangeFreqPercent.TabIndex = 11;
@@ -227,7 +229,7 @@
             // HelpButton
             // 
             this.HelpButton.Location = new System.Drawing.Point(13, 428);
-            this.HelpButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.HelpButton.Margin = new System.Windows.Forms.Padding(4);
             this.HelpButton.Name = "HelpButton";
             this.HelpButton.Size = new System.Drawing.Size(75, 57);
             this.HelpButton.TabIndex = 12;
@@ -240,7 +242,7 @@
             this.Severity1Percent.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Severity1Percent.Enabled = false;
             this.Severity1Percent.Location = new System.Drawing.Point(20, 210);
-            this.Severity1Percent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Severity1Percent.Margin = new System.Windows.Forms.Padding(4);
             this.Severity1Percent.Name = "Severity1Percent";
             this.Severity1Percent.Size = new System.Drawing.Size(79, 29);
             this.Severity1Percent.TabIndex = 13;
@@ -275,7 +277,7 @@
             this.Severity2Percent.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Severity2Percent.Enabled = false;
             this.Severity2Percent.Location = new System.Drawing.Point(20, 247);
-            this.Severity2Percent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Severity2Percent.Margin = new System.Windows.Forms.Padding(4);
             this.Severity2Percent.Name = "Severity2Percent";
             this.Severity2Percent.Size = new System.Drawing.Size(79, 29);
             this.Severity2Percent.TabIndex = 15;
@@ -300,7 +302,7 @@
             this.Severity3Percent.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Severity3Percent.Enabled = false;
             this.Severity3Percent.Location = new System.Drawing.Point(20, 282);
-            this.Severity3Percent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Severity3Percent.Margin = new System.Windows.Forms.Padding(4);
             this.Severity3Percent.Name = "Severity3Percent";
             this.Severity3Percent.Size = new System.Drawing.Size(79, 29);
             this.Severity3Percent.TabIndex = 17;
@@ -325,7 +327,7 @@
             this.Severity4Percent.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Severity4Percent.Enabled = false;
             this.Severity4Percent.Location = new System.Drawing.Point(20, 318);
-            this.Severity4Percent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Severity4Percent.Margin = new System.Windows.Forms.Padding(4);
             this.Severity4Percent.Name = "Severity4Percent";
             this.Severity4Percent.Size = new System.Drawing.Size(79, 29);
             this.Severity4Percent.TabIndex = 19;
@@ -350,7 +352,7 @@
             this.Severity4RoomWait.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Severity4RoomWait.Enabled = false;
             this.Severity4RoomWait.Location = new System.Drawing.Point(326, 318);
-            this.Severity4RoomWait.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Severity4RoomWait.Margin = new System.Windows.Forms.Padding(4);
             this.Severity4RoomWait.Name = "Severity4RoomWait";
             this.Severity4RoomWait.Size = new System.Drawing.Size(79, 29);
             this.Severity4RoomWait.TabIndex = 28;
@@ -375,7 +377,7 @@
             this.Severity3RoomWait.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Severity3RoomWait.Enabled = false;
             this.Severity3RoomWait.Location = new System.Drawing.Point(326, 282);
-            this.Severity3RoomWait.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Severity3RoomWait.Margin = new System.Windows.Forms.Padding(4);
             this.Severity3RoomWait.Name = "Severity3RoomWait";
             this.Severity3RoomWait.Size = new System.Drawing.Size(79, 29);
             this.Severity3RoomWait.TabIndex = 26;
@@ -400,7 +402,7 @@
             this.Severity2RoomWait.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Severity2RoomWait.Enabled = false;
             this.Severity2RoomWait.Location = new System.Drawing.Point(326, 247);
-            this.Severity2RoomWait.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Severity2RoomWait.Margin = new System.Windows.Forms.Padding(4);
             this.Severity2RoomWait.Name = "Severity2RoomWait";
             this.Severity2RoomWait.Size = new System.Drawing.Size(79, 29);
             this.Severity2RoomWait.TabIndex = 24;
@@ -425,7 +427,7 @@
             this.Severity1RoomWait.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Severity1RoomWait.Enabled = false;
             this.Severity1RoomWait.Location = new System.Drawing.Point(326, 210);
-            this.Severity1RoomWait.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Severity1RoomWait.Margin = new System.Windows.Forms.Padding(4);
             this.Severity1RoomWait.Name = "Severity1RoomWait";
             this.Severity1RoomWait.Size = new System.Drawing.Size(79, 29);
             this.Severity1RoomWait.TabIndex = 22;
@@ -440,7 +442,7 @@
             this.ChangeRoomWait.AutoSize = true;
             this.ChangeRoomWait.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ChangeRoomWait.Location = new System.Drawing.Point(326, 175);
-            this.ChangeRoomWait.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ChangeRoomWait.Margin = new System.Windows.Forms.Padding(4);
             this.ChangeRoomWait.Name = "ChangeRoomWait";
             this.ChangeRoomWait.Size = new System.Drawing.Size(202, 29);
             this.ChangeRoomWait.TabIndex = 21;
@@ -461,9 +463,10 @@
             // shiftLength
             // 
             this.shiftLength.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.shiftLength.DecimalPlaces = 1;
             this.shiftLength.Enabled = false;
             this.shiftLength.Location = new System.Drawing.Point(205, 364);
-            this.shiftLength.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.shiftLength.Margin = new System.Windows.Forms.Padding(4);
             this.shiftLength.Name = "shiftLength";
             this.shiftLength.Size = new System.Drawing.Size(79, 29);
             this.shiftLength.TabIndex = 30;
@@ -555,7 +558,7 @@
             this.Controls.Add(this.topMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.topMenu;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrontPanel";

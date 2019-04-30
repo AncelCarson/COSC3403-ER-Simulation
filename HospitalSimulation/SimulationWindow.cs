@@ -15,7 +15,7 @@ namespace HospitalSimulation
         private static int totalSimulations;
         private int simID,
             numRooms, 
-            shiftLength, 
+             
             tick = 0, 
             timeNext = 0, 
             patientWait = 0, 
@@ -27,6 +27,7 @@ namespace HospitalSimulation
             closeWait = new int[4],
             numRatings = new int[4],
             totalRatingWaits = new int[4];
+        private float shiftLength;
         private float[] waitDelays,
             aveRatingsWait = new float[4];
         private Boolean simRun = true, 
@@ -61,7 +62,7 @@ namespace HospitalSimulation
             results.Show();
         }
 
-        public SimulationWindow(int rooms, int shiftLen, int[] ratings, int[] times, float[] delays)
+        public SimulationWindow(int rooms, float shiftLen, int[] ratings, int[] times, float[] delays)
         {
             severityRatings = new int[ratings.Length];
             for (int i = 0; i < ratings.Length; i++)
@@ -96,8 +97,8 @@ namespace HospitalSimulation
             {
                 RatingLine[i] = new Queue<Patient>();
             }
-            SetDispText();
             SetGroups();
+            SetDispText();
             OpenRooms(numRooms);
         }
 
@@ -105,6 +106,11 @@ namespace HospitalSimulation
         {
             ShiftLengthLabel.Text = "Progress of " + shiftLength + " hour shift";
             this.Text = "Simulation Window " + simID;
+            for(int i = 0; i < numRooms; i++)
+            {
+                PatientNum[i].Text = "Patient #: ";
+                PatientRating[i].Text = "Patient rating: ";
+            }
         }
 
         private void SetGroups()
@@ -178,6 +184,10 @@ namespace HospitalSimulation
                 GetPatients();
             }
 
+            patientWait = RatingLine[0].Count + RatingLine[1].Count + RatingLine[2].Count + RatingLine[3].Count;
+            SortPatients();
+            UpdateText();
+
             if (tick < (shiftLength * 600))
             {
                 TimeCompleteProgress.Value = (int)(((float)tick / ((float)shiftLength * 600)) * 100);
@@ -196,7 +206,7 @@ namespace HospitalSimulation
                     Timer1.Stop();
                     for (int i = 0; i < numRooms; i++)
                     {
-                        if (room[i] == null)
+                        if (Rooms[i].Enabled == false)
                         {
                             openRooms++;
                         }
@@ -205,9 +215,6 @@ namespace HospitalSimulation
                     results.Show();
                 }
             }
-            patientWait = RatingLine[0].Count + RatingLine[1].Count + RatingLine[2].Count + RatingLine[3].Count;
-            SortPatients();
-            UpdateText();
             tick++;
         }
 
