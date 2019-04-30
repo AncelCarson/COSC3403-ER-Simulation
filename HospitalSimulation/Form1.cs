@@ -243,17 +243,11 @@ namespace HospitalSimulation
                 //Create new patient
                 patients.AddPatient(ref (severityRatings), ref (roomTimes), ref (waitDelays));
                 j += patients.GetPatient(numPatients).GetDelayTime();
-                switch (patients.GetPatient(numPatients).GetRating())
-                {
-                    case 1: rating1++; break;
-                    case 2: rating2++; break;
-                    case 3: rating3++; break;
-                    case 4: rating4++; break;
-                }
+                patients.GetPatient(numPatients).SetArrivalTime((int)j);
                 numPatients++;
             }
 
-            shift += patients.GetPatient(1).GetDelayTime();
+            shift += patients.GetPatient(1).GetArrivalTime();
             lowestRoomtime = patients.GetPatient(1).roomTime;
 
             //Run Shift
@@ -264,11 +258,11 @@ namespace HospitalSimulation
                 {
                     if(patients.GetPatient(i)!= null)
                     {
-                        if (patients.GetPatient(i).GetDelayTime() <= shift)
+                        if (patients.GetPatient(i).GetArrivalTime() <= shift)
                         {
-                            if (patients.GetPatient(i).GetDelayTime() < shift && patients.GetPatient(i).GetDelayTime() < shift - lowestRoomtime)
+                            if (patients.GetPatient(i).GetArrivalTime() < shift && patients.GetPatient(i).GetArrivalTime() < shift - lowestRoomtime)
                             {
-                                patients.GetPatient(i).roomTime -= (int)(shift - patients.GetPatient(i).GetDelayTime());
+                                patients.GetPatient(i).roomTime -= (int)(shift - patients.GetPatient(i).GetArrivalTime());
                             }
                             patients.GetPatient(i).roomTime -= lowestRoomtime;
 
@@ -304,7 +298,7 @@ namespace HospitalSimulation
 
                 for(int i = numRooms; i < patients.GetSize(); i++)
                 {
-                    if (patients.GetPatient(i).GetDelayTime() <= shift)
+                    if (patients.GetPatient(i).GetArrivalTime() <= shift)
                     {
                         patients.GetPatient(i).AddWaitLength(lowestRoomtime);
                         System.Diagnostics.Debug.WriteLine(patients.GetPatient(i).GetWaitLength().ToString());
@@ -323,13 +317,13 @@ namespace HospitalSimulation
                 }
                 else
                 {
-                    /*switch (patients.GetPatient(i).GetRating())
+                    switch (patients.GetPatient(i).GetRating())
                     {
                         case 1: rating1++; break;
                         case 2: rating2++; break;
                         case 3: rating3++; break;
                         case 4: rating4++; break;
-                    }*/
+                    }
                         
                 }
             }
@@ -341,11 +335,11 @@ namespace HospitalSimulation
                 {
                     if (patients.GetPatient(i) != null)
                     {
-                        if (patients.GetPatient(i).GetDelayTime() <= shift)
+                        if (patients.GetPatient(i).GetArrivalTime() <= shift)
                         {
-                            if (patients.GetPatient(i).GetDelayTime() < shift && patients.GetPatient(i).GetDelayTime() < shift - lowestRoomtime)
+                            if (patients.GetPatient(i).GetArrivalTime() < shift && patients.GetPatient(i).GetArrivalTime() < shift - lowestRoomtime)
                             {
-                                patients.GetPatient(i).roomTime -= (int)(shift - patients.GetPatient(i).GetDelayTime());
+                                patients.GetPatient(i).roomTime -= (int)(shift - patients.GetPatient(i).GetArrivalTime());
                             }
                             patients.GetPatient(i).roomTime -= lowestRoomtime;
 
@@ -381,7 +375,7 @@ namespace HospitalSimulation
 
                 for (int i = numRooms; i < patients.GetSize(); i++)
                 {
-                    if (patients.GetPatient(i).GetDelayTime() <= shift)
+                    if (patients.GetPatient(i).GetArrivalTime() <= shift)
                     {
                         patients.GetPatient(i).AddWaitLength(lowestRoomtime);
                         System.Diagnostics.Debug.WriteLine(patients.GetPatient(i).GetWaitLength().ToString());

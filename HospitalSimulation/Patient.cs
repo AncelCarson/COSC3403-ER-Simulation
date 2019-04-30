@@ -99,11 +99,15 @@ public class Patient
         return waitLength;
     }
     //sets the time the patient arrived at the hospital
-    public void SetArrivalTime(ref int localTime)
+    public void SetArrivalTime(int localTime)
     {
         arrivalTime = localTime;
     }
 
+    public int GetArrivalTime()
+    {
+        return arrivalTime;
+    }
     //Determines how long a patient waited and returns how long it will be in a room
     public int Roomed(ref int localTime)
     {

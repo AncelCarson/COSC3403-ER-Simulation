@@ -225,7 +225,7 @@ namespace HospitalSimulation
             {
                 patientsMade++;
                 Patient newPatient = new Patient(ref severityRatings, ref roomTimes, ref waitDelays, patientsMade, ref rnd);
-                newPatient.SetArrivalTime(ref tick);
+                newPatient.SetArrivalTime(tick);
                 switch (newPatient.GetRating())
                 {
                     case 1: RatingLine[0].Enqueue(newPatient); break;
