@@ -39,6 +39,24 @@ namespace HospitalSimulation
             EmptyRoomCount.Text = openRooms + " rooms were empty by the end of the simulation";
         }
 
+        public Results(float shiftLen, int rating1, int rating2, int rating3, int rating4, float wait1, float wait2, float wait3, float wait4, float timeOver, int openRooms, int simNum)
+        {
+            InitializeComponent();
+            SetGroups();
+            this.Text = "Results for instant simulation" + simNum;
+            ShiftTimeLabel.Text = "After " + shiftLen + " hours:";
+            RatingCount[0].Text = rating1 + " patients of rating type 1";
+            RatingCount[1].Text = rating2 + " patients of rating type 2";
+            RatingCount[2].Text = rating3 + " patients of rating type 3";
+            RatingCount[3].Text = rating4 + " patients of rating type 4";
+            ExtraTimeLabel.Text = "It took " + timeOver.ToString("n2") + " hours to room the remaining patients";
+            AveWait[0].Text = "Average wait time for rating 1: " + wait1.ToString("n2") + " minutes";
+            AveWait[1].Text = "Average wait time for rating 2: " + wait2.ToString("n2") + " minutes";
+            AveWait[2].Text = "Average wait time for rating 3: " + wait3.ToString("n2") + " minutes";
+            AveWait[3].Text = "Average wait time for rating 4: " + wait4.ToString("n2") + " minutes";
+            EmptyRoomCount.Text = openRooms + " rooms were empty by the end of the simulation";
+        }
+
         private void SetGroups()
         {
             AveWait[0] = AveWait1;

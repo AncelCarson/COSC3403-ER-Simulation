@@ -92,6 +92,10 @@ public class Patient
         waitLength += time;
     }
 
+    public int GetWaitLength()
+    {
+        return waitLength;
+    }
     //sets the time the patient arrived at the hospital
     public void SetArrivalTime(ref int localTime)
     {
