@@ -2,14 +2,15 @@
 
 public class Patient
 {
-    public int roomTime;
+    public int roomTimeManip;
     private int 
         rating, 
         arrivalTime,
         roomedTime,
         waitLength,
         priorityNum,
-        patientNumber;
+        patientNumber,
+        roomTime;
     private static int totalPatientNum;
     private float delayTime;
     Random rnd;
@@ -38,6 +39,7 @@ public class Patient
         SetRoomTime(ref roomTimes);
         SetDelayTime(ref waitDelays);
         totalPatientNum++;
+        roomTimeManip = roomTime;
     }
 
     public Patient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays, int patientNumber, ref Random rnd)
@@ -89,14 +91,11 @@ public class Patient
         return localTime - arrivalTime;
     }
 
-    public void AddWaitLength(int time)
+    public float GetWaitLength(float time)
     {
-        waitLength += time;
-    }
-
-    public int GetWaitLength()
-    {
-        return waitLength;
+        //System.Diagnostics.Debug.Write("wait time: ");
+        //System.Diagnostics.Debug.WriteLine(time - arrivalTime);
+        return time-arrivalTime - roomTime;
     }
     //sets the time the patient arrived at the hospital
     public void SetArrivalTime(int localTime)

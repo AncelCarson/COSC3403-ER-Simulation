@@ -24,6 +24,7 @@ namespace HospitalSimulation
         private float wait3 = 0;
         private float wait4 = 0;
         private Random rnd;
+        private float finishTime;
 
         public PatientQueue(int rooms, ref Random rnd)
         {
@@ -36,7 +37,6 @@ namespace HospitalSimulation
 
         public Patient AddPatient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays)
         {
-            System.Diagnostics.Debug.WriteLine(index);
             if (size == index + 1)
             {
                 Resize();
@@ -90,7 +90,6 @@ namespace HospitalSimulation
             //Might need to be >=
             for(int i = index-1; i >= rooms; i--)
             {
-                System.Diagnostics.Debug.WriteLine(i);
                 if (queue[i].GetRating() == 4)
                 {
                     if (queue[i-1].GetRating() != 4)
@@ -109,21 +108,24 @@ namespace HospitalSimulation
             }
         }
 
-        public void RemovePatient(int position)
+        public void RemovePatient(int position, float time)
         {
-
+            //System.Diagnostics.Debug.Write("remove time: ");
+            //System.Diagnostics.Debug.WriteLine(time);
             switch (queue[position-1].GetRating())
             {
-                case 1: rat1++; wait1 += queue[position - 1].GetWaitLength(); break;
-                case 2: rat2++; wait2 += queue[position - 1].GetWaitLength(); break;
-                case 3: rat3++; wait3 += queue[position - 1].GetWaitLength(); break;
-                case 4: rat4++; wait4 += queue[position - 1].GetWaitLength(); break;
+                case 1: rat1++; wait1 += queue[position - 1].GetWaitLength(time); break;
+                case 2: rat2++; wait2 += queue[position - 1].GetWaitLength(time); break;
+                case 3: rat3++; wait3 += queue[position - 1].GetWaitLength(time); break;
+                case 4: rat4++; wait4 += queue[position - 1].GetWaitLength(time); break;
             }
             if (queue[rooms] != null)
             {
                 queue[position - 1] = queue[rooms];
-                for(int i = rooms; i < index; i++)
+                System.Diagnostics.Debug.WriteLine(queue[rooms].GetArrivalTime());
+                for (int i = rooms; i < index; i++)
                 {
+                    System.Diagnostics.Debug.WriteLine(queue[i].GetArrivalTime());
                     queue[i] = queue[i + 1];
                 }
                 index--;
@@ -140,29 +142,37 @@ namespace HospitalSimulation
             {
                 switch (queue[i].GetRating())
                 {
-                    case 1: rat1++; wait1 += queue[i].GetWaitLength(); break;
-                    case 2: rat2++; wait2 += queue[i].GetWaitLength(); break;
-                    case 3: rat3++; wait3 += queue[i].GetWaitLength(); break;
-                    case 4: rat4++; wait4 += queue[i].GetWaitLength(); break;
+                    case 1: rat1++; wait1 += queue[i].GetWaitLength(finishTime); break;
+                    case 2: rat2++; wait2 += queue[i].GetWaitLength(finishTime); break;
+                    case 3: rat3++; wait3 += queue[i].GetWaitLength(finishTime); break;
+                    case 4: rat4++; wait4 += queue[i].GetWaitLength(finishTime); break;
                 }
             }
         }
 
-        public float GetAvgWait1()
+        public float GetAvgWait1(float time)
         {
-
+            //System.Diagnostics.Debug.WriteLine(wait1);
+            //System.Diagnostics.Debug.WriteLine(rat1);
+            finishTime = time;
             return (wait1) / rat1;
         }
         public float GetAvgWait2()
         {
+            //System.Diagnostics.Debug.WriteLine(wait2);
+            //System.Diagnostics.Debug.WriteLine(rat2);
             return (wait2) / rat2;
         }
         public float GetAvgWait3()
         {
+            //System.Diagnostics.Debug.WriteLine(wait3);
+            //System.Diagnostics.Debug.WriteLine(rat3);
             return (wait3) / rat3;
         }
         public float GetAvgWait4()
         {
+            //System.Diagnostics.Debug.WriteLine(wait4);
+            //System.Diagnostics.Debug.WriteLine(rat4);
             return (wait4) / rat4;
         }
 
