@@ -81,7 +81,7 @@ public class Patient
 
     public int GetPriority(int localTime)
     {
-        return (localTime - arrivalTime) * rating;
+        return ((localTime - arrivalTime)*(localTime - arrivalTime) * 4 + rating*100)/ ((localTime - arrivalTime) * (localTime - arrivalTime) + 100);
     }
 
     public int GetWaitTime(ref int localTime)

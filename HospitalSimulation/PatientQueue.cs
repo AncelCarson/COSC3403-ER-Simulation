@@ -36,7 +36,8 @@ namespace HospitalSimulation
 
         public Patient AddPatient(ref int[] severityRatings, ref int[] roomTimes, ref float[] waitDelays)
         {
-            if(size == index + 1)
+            System.Diagnostics.Debug.WriteLine(index);
+            if (size == index + 1)
             {
                 Resize();
             }
@@ -84,12 +85,22 @@ namespace HospitalSimulation
             return queue[position - 1];
         }
 
-        public void SortQueue()
+        public void SortQueue(int time)
         {
             //Might need to be >=
-            for(int i = index; i >= rooms; i--)
+            for(int i = index-1; i >= rooms; i--)
             {
-                if (queue[i].GetPriorityNum() > queue[i - 1].GetPriorityNum())
+                System.Diagnostics.Debug.WriteLine(i);
+                if (queue[i].GetRating() == 4)
+                {
+                    if (queue[i-1].GetRating() != 4)
+                    {
+                        tempP = queue[i - 1];
+                        queue[i - 1] = queue[i];
+                        queue[i] = tempP;
+                    }
+                }
+                else if(queue[i].GetPriority(time) > queue[i - 1].GetPriority(time))
                 {
                     tempP = queue[i - 1];
                     queue[i - 1] = queue[i];

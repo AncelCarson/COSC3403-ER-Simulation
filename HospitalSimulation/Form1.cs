@@ -301,11 +301,12 @@ namespace HospitalSimulation
                     if (patients.GetPatient(i).GetArrivalTime() <= shift)
                     {
                         patients.GetPatient(i).AddWaitLength(lowestRoomtime);
-                        System.Diagnostics.Debug.WriteLine(patients.GetPatient(i).GetWaitLength().ToString());
+                        
                     }
                 }
 
                 //Resort Queue
+                patients.SortQueue((int)shift);
                 shift += lowestRoomtime;
                 lowestRoomtime = lowestRoomtimeN;
             }
@@ -378,11 +379,12 @@ namespace HospitalSimulation
                     if (patients.GetPatient(i).GetArrivalTime() <= shift)
                     {
                         patients.GetPatient(i).AddWaitLength(lowestRoomtime);
-                        System.Diagnostics.Debug.WriteLine(patients.GetPatient(i).GetWaitLength().ToString());
+                        
                     }
                 }
 
                 //Resort Queue
+                patients.SortQueue((int)(shift+shiftOver));
                 shiftOver += lowestRoomtime;
                 lowestRoomtime = lowestRoomtimeN;
             }
