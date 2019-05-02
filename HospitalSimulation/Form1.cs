@@ -326,6 +326,16 @@ namespace HospitalSimulation
                         
                 }
             }
+            for(int i = numRooms+1; i <= patients.GetSize();i++)
+            {
+                switch (patients.GetPatient(i).GetRating())
+                {
+                    case 1: rating1++; break;
+                    case 2: rating2++; break;
+                    case 3: rating3++; break;
+                    case 4: rating4++; break;
+                }
+            }
 
             while (patients.GetPatient(numRooms+1)!= null)
             {
