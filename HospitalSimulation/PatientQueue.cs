@@ -101,7 +101,7 @@ namespace HospitalSimulation
                 }
                 else*/ if(queue[i].GetArrivalTime() <= time)
                 {
-                    if(queue[i].GetPriority(time) > queue[i - 1].GetPriority(time))
+                    if(queue[i].GetPriorityQueue(time) > queue[i - 1].GetPriorityQueue(time))
                     {
                         tempP = queue[i - 1];
                         queue[i - 1] = queue[i];

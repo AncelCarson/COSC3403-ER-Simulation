@@ -83,7 +83,12 @@ public class Patient
 
     public int GetPriority(int localTime)
     {
-        return ((localTime - arrivalTime) * 4 + rating*100)/ ((localTime - arrivalTime) + 100);
+        return (localTime - arrivalTime) * rating;
+    }
+
+    public int GetPriorityQueue(int localTime)
+    {
+        return ((localTime - arrivalTime) * 4 + rating * 100) / ((localTime - arrivalTime) + 100);
     }
 
     public int GetWaitTime(ref int localTime)
@@ -96,6 +101,12 @@ public class Patient
         //System.Diagnostics.Debug.Write("wait time: ");
         //System.Diagnostics.Debug.WriteLine(time - arrivalTime);
         return time-arrivalTime - roomTime;
+    }
+    public float GetWaitLengthFinal(float time)
+    {
+        //System.Diagnostics.Debug.Write("wait time: ");
+        //System.Diagnostics.Debug.WriteLine(time - arrivalTime);
+        return time - arrivalTime + (roomTimeManip - roomTime);
     }
     //sets the time the patient arrived at the hospital
     public void SetArrivalTime(int localTime)
