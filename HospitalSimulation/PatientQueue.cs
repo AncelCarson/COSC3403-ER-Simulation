@@ -90,7 +90,7 @@ namespace HospitalSimulation
             //Might need to be >=
             for(int i = index-1; i >= rooms; i--)
             {
-                if (queue[i].GetRating() == 4)
+                /*if (queue[i].GetRating() == 4)
                 {
                     if (queue[i-1].GetRating() != 4)
                     {
@@ -99,11 +99,14 @@ namespace HospitalSimulation
                         queue[i] = tempP;
                     }
                 }
-                else if(queue[i].GetPriority(time) > queue[i - 1].GetPriority(time))
+                else*/ if(queue[i].GetArrivalTime() <= time)
                 {
-                    tempP = queue[i - 1];
-                    queue[i - 1] = queue[i];
-                    queue[i] = tempP;
+                    if(queue[i].GetPriority(time) > queue[i - 1].GetPriority(time))
+                    {
+                        tempP = queue[i - 1];
+                        queue[i - 1] = queue[i];
+                        queue[i] = tempP;
+                    }
                 }
             }
         }
