@@ -195,6 +195,17 @@ namespace HospitalSimulation
             }
         }
 
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (help != null)
+            {
+                help.Close();
+            }
+
+            help = new HelpForm();
+            help.Show();
+        }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -234,7 +245,7 @@ namespace HospitalSimulation
             int rating3 = 0;
             int rating4 = 0;
             instantSimNum++;
-            int counter =0;
+            //int counter =0;
 
             //Pregenerate patients
             for (float j = 0; j <= shiftLen * 60;)
@@ -252,8 +263,8 @@ namespace HospitalSimulation
             //Run Shift
             while (shift <= shiftLen*60)
             {
-                counter++;
-                System.Diagnostics.Debug.WriteLine(counter);
+                //counter++;
+                //System.Diagnostics.Debug.WriteLine(counter);
                 lowestRoomtime = 100000;
                 //if not null -> if arrived -> if smaller than current room time
                 for (int z = 1; z <= numRooms; z++)
@@ -290,11 +301,7 @@ namespace HospitalSimulation
                             //Creates inacuracies if value is less than zero as that is not propogated forward
                             if (patients.GetPatient(i).roomTimeManip <= 0)
                             {
-                                if (patients.GetPatient(i).roomTimeManip < 0)
-                                {
-                                    System.Diagnostics.Debug.WriteLine("Negative Room Time?");
-                                }
-                                else if (patients.GetPatient(i).roomTimeManip == 0)
+                                if (patients.GetPatient(i).roomTimeManip == 0)
                                 {
                                     patients.RemovePatient(i, shift);
                                 }
@@ -339,8 +346,8 @@ namespace HospitalSimulation
 
             while (patients.GetPatient(numRooms+1)!= null)
             {
-                counter++;
-                System.Diagnostics.Debug.WriteLine(counter);
+                //counter++;
+                //System.Diagnostics.Debug.WriteLine(counter);
                 lowestRoomtime = 100000;
                 //if not null -> if arrived -> if smaller than current room time
                 for (int z = 1; z <= numRooms; z++)
@@ -377,11 +384,7 @@ namespace HospitalSimulation
                             //Creates inacuracies if value is less than zero as that is not propogated forward
                             if (patients.GetPatient(i).roomTimeManip <= 0)
                             {
-                                if (patients.GetPatient(i).roomTimeManip < 0)
-                                {
-                                    System.Diagnostics.Debug.WriteLine("Negative Room Time?");
-                                }
-                                else if (patients.GetPatient(i).roomTimeManip == 0)
+                                if (patients.GetPatient(i).roomTimeManip == 0)
                                 {
                                     patients.RemovePatient(i, shift + shiftOver);
                                 }
@@ -398,6 +401,7 @@ namespace HospitalSimulation
             results = new Results(shiftLen, rating1, rating2, rating3, rating4, patients.GetAvgWait1(shift+shiftOver), patients.GetAvgWait2(), patients.GetAvgWait3(),
                 patients.GetAvgWait4(), shiftOver/60, openRooms, instantSimNum);
             results.Show();
+            //System.Diagnostics.Debug.WriteLine("Next Run");
         }
 
         private void UpdateSentValues()

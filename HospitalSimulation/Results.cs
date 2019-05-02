@@ -32,14 +32,14 @@ namespace HospitalSimulation
             RatingCount[2].Text = closeWait[2] + " patients of rating type 3";
             RatingCount[3].Text = closeWait[3] + " patients of rating type 4";
             ExtraTimeLabel.Text = "It took " + (((float)closeTime/600) - (float)shiftLen).ToString("n2") + " hours to room the remaining patients";
-            AveWait[0].Text = "Average wait time for rating 1: " + aveWaits[0].ToString("n2") + " minutes";
-            AveWait[1].Text = "Average wait time for rating 2: " + aveWaits[1].ToString("n2") + " minutes";
-            AveWait[2].Text = "Average wait time for rating 3: " + aveWaits[2].ToString("n2") + " minutes";
-            AveWait[3].Text = "Average wait time for rating 4: " + aveWaits[3].ToString("n2") + " minutes";
+            AveWait[0].Text = "Average wait time for rating 1: " + aveWaits[0] + " minutes";
+            AveWait[1].Text = "Average wait time for rating 2: " + aveWaits[1] + " minutes";
+            AveWait[2].Text = "Average wait time for rating 3: " + aveWaits[2] + " minutes";
+            AveWait[3].Text = "Average wait time for rating 4: " + aveWaits[3] + " minutes";
             EmptyRoomCount.Text = openRooms + " rooms were empty by the end of the simulation";
         }
 
-        public Results(float shiftLen, int rating1, int rating2, int rating3, int rating4, float wait1, float wait2, float wait3, float wait4, float timeOver, int openRooms, int simNum)
+        public Results(float shiftLen, int rating1, int rating2, int rating3, int rating4, int wait1, int wait2, int wait3, int wait4, float timeOver, int openRooms, int simNum)
         {
             InitializeComponent();
             SetGroups();
@@ -50,10 +50,10 @@ namespace HospitalSimulation
             RatingCount[2].Text = rating3 + " patients of rating type 3";
             RatingCount[3].Text = rating4 + " patients of rating type 4";
             ExtraTimeLabel.Text = "It took " + timeOver.ToString("n2") + " hours to room the remaining patients";
-            AveWait[0].Text = "Average wait time for rating 1: " + wait1.ToString("n2") + " minutes";
-            AveWait[1].Text = "Average wait time for rating 2: " + wait2.ToString("n2") + " minutes";
-            AveWait[2].Text = "Average wait time for rating 3: " + wait3.ToString("n2") + " minutes";
-            AveWait[3].Text = "Average wait time for rating 4: " + wait4.ToString("n2") + " minutes";
+            AveWait[0].Text = "Average wait time for rating 1: " + wait1 + " minutes";
+            AveWait[1].Text = "Average wait time for rating 2: " + wait2 + " minutes";
+            AveWait[2].Text = "Average wait time for rating 3: " + wait3 + " minutes";
+            AveWait[3].Text = "Average wait time for rating 4: " + wait4 + " minutes";
             EmptyRoomCount.Text = openRooms + " rooms were empty by the end of the simulation";
         }
 

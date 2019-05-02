@@ -98,14 +98,16 @@ public class Patient
 
     public float GetWaitLength(float time)
     {
-        //System.Diagnostics.Debug.Write("wait time: ");
-        //System.Diagnostics.Debug.WriteLine(time - arrivalTime);
+        //System.Diagnostics.Debug.Write("wait time:\t");
+        //System.Diagnostics.Debug.Write(time - arrivalTime);
+        //System.Diagnostics.Debug.WriteLine("\t" + rating);
         return time-arrivalTime - roomTime;
     }
     public float GetWaitLengthFinal(float time)
     {
-        //System.Diagnostics.Debug.Write("wait time: ");
-        //System.Diagnostics.Debug.WriteLine(time - arrivalTime);
+        //System.Diagnostics.Debug.Write("wait time:\t");
+        //System.Diagnostics.Debug.Write(time - arrivalTime);
+        //System.Diagnostics.Debug.WriteLine("\t" + rating);
         return time - arrivalTime + (roomTimeManip - roomTime);
     }
     //sets the time the patient arrived at the hospital

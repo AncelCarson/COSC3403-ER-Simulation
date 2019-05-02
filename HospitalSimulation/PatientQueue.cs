@@ -125,10 +125,10 @@ namespace HospitalSimulation
             if (queue[rooms] != null)
             {
                 queue[position - 1] = queue[rooms];
-                System.Diagnostics.Debug.WriteLine(queue[rooms].GetArrivalTime());
+                //System.Diagnostics.Debug.WriteLine(queue[rooms].GetArrivalTime());
                 for (int i = rooms; i < index; i++)
                 {
-                    System.Diagnostics.Debug.WriteLine(queue[i].GetArrivalTime());
+                    //System.Diagnostics.Debug.WriteLine(queue[i].GetArrivalTime());
                     queue[i] = queue[i + 1];
                 }
                 index--;
@@ -153,30 +153,30 @@ namespace HospitalSimulation
             }
         }
 
-        public float GetAvgWait1(float time)
+        public int GetAvgWait1(float time)
         {
             //System.Diagnostics.Debug.WriteLine(wait1);
             //System.Diagnostics.Debug.WriteLine(rat1);
             finishTime = time;
-            return (wait1) / rat1;
+            return (int)((wait1) / rat1);
         }
-        public float GetAvgWait2()
+        public int GetAvgWait2()
         {
             //System.Diagnostics.Debug.WriteLine(wait2);
             //System.Diagnostics.Debug.WriteLine(rat2);
-            return (wait2) / rat2;
+            return (int)((wait2) / rat2);
         }
-        public float GetAvgWait3()
+        public int GetAvgWait3()
         {
             //System.Diagnostics.Debug.WriteLine(wait3);
             //System.Diagnostics.Debug.WriteLine(rat3);
-            return (wait3) / rat3;
+            return (int)((wait3) / rat3);
         }
-        public float GetAvgWait4()
+        public int GetAvgWait4()
         {
             //System.Diagnostics.Debug.WriteLine(wait4);
             //System.Diagnostics.Debug.WriteLine(rat4);
-            return (wait4) / rat4;
+            return (int)((wait4) / rat4);
         }
 
     }
