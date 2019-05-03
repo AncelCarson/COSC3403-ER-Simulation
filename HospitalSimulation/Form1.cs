@@ -218,6 +218,7 @@ namespace HospitalSimulation
             {
                 totalChance += severityRatings[i];
             }
+
             if (totalChance != 100)
             {
                 MessageBox.Show("Chance values must add to 100.", "Check values and try again");
@@ -229,6 +230,12 @@ namespace HospitalSimulation
                 MessageBox.Show("Delay values must be formatted minimum then maximum.", "Check values and try again");
                 return false;
             }
+
+            if (waitDelays[0] == 0 && waitDelays[1]==0)
+            {
+                MessageBox.Show("Both minimum and maximum cannot be zero.", "Check values and try again");
+                return false;
+            }
             return true;
         }
 
@@ -237,13 +244,14 @@ namespace HospitalSimulation
             
             float shift=0;
             float shiftOver = 0;
-            int lowestRoomtime;
+            float incrament;
             int numPatients = 0;
             int openRooms = 0;
             int rating1 = 0;
             int rating2 = 0;
             int rating3 = 0;
             int rating4 = 0;
+            float stopper = 0;
             instantSimNum++;
             //int counter =0;
 
@@ -259,13 +267,15 @@ namespace HospitalSimulation
             }
 
             shift += patients.GetPatient(1).GetArrivalTime();
+            stopper = patients.GetPatient(patients.GetSize()).GetArrivalTime();
+            //System.Diagnostics.Debug.WriteLine("Stopper: " + stopper);
 
             //Run Shift
             while (shift <= shiftLen*60)
             {
                 //counter++;
                 //System.Diagnostics.Debug.WriteLine(counter);
-                lowestRoomtime = 100000;
+                incrament = 100000;
                 //if not null -> if arrived -> if smaller than current room time
                 for (int z = 1; z <= numRooms; z++)
                 {
@@ -273,38 +283,32 @@ namespace HospitalSimulation
                     System.Diagnostics.Debug.WriteLine(patients.GetPatient(z).GetArrivalTime());
                     System.Diagnostics.Debug.Write("current Time");
                     System.Diagnostics.Debug.WriteLine(shift);*/
-                    //if (patients.GetPatient(z) != null)
+                    if (patients.GetPatient(z) != null)
                     {
-                        if (patients.GetPatient(z).GetArrivalTime() <= shift)
+                        if (patients.GetPatient(z).roomTimeManip < incrament && patients.GetPatient(z).GetArrivalTime() <= shift)
                         {
-                            if (patients.GetPatient(z).roomTimeManip < lowestRoomtime)
-                            {
-                                lowestRoomtime = patients.GetPatient(z).roomTimeManip;
-                            }
+                            incrament = patients.GetPatient(z).roomTimeManip;
+                        }
+                        if (patients.GetPatient(z).GetArrivalTime() < incrament + shift && patients.GetPatient(z).GetArrivalTime() > shift)
+                        {
+                            incrament = patients.GetPatient(z).GetArrivalTime()- shift;
                         }
                     }
                 }
 
                 for (int i=1; i <= numRooms; i++)
                 {
-                    //if(patients.GetPatient(i)!= null)
+                    if(patients.GetPatient(i)!= null)
                     {
                         if (patients.GetPatient(i).GetArrivalTime() <= shift)
                         {
-                            /*if (patients.GetPatient(i).GetArrivalTime() < shift && patients.GetPatient(i).GetArrivalTime() > shift - lowestRoomtime)
-                            {
-                                System.Diagnostics.Debug.WriteLine("Is this Possible?");
-                                patients.GetPatient(i).roomTime -= (int)(shift - patients.GetPatient(i).GetArrivalTime());
-                            }*/
-                            patients.GetPatient(i).roomTimeManip -= lowestRoomtime;
+                            
+                            patients.GetPatient(i).roomTimeManip -= incrament;
 
                             //Creates inacuracies if value is less than zero as that is not propogated forward
-                            if (patients.GetPatient(i).roomTimeManip <= 0)
+                            if (patients.GetPatient(i).roomTimeManip == 0)
                             {
-                                if (patients.GetPatient(i).roomTimeManip == 0)
-                                {
-                                    patients.RemovePatient(i, shift);
-                                }
+                                patients.RemovePatient(i, shift + incrament);
                             }
                         }
                     }
@@ -313,7 +317,7 @@ namespace HospitalSimulation
                 //System.Diagnostics.Debug.WriteLine(shift);
                 //Resort Queue
                 patients.SortQueue((int)shift);
-                shift += lowestRoomtime;
+                shift += incrament;
             }
             for (int i = 1; i <= numRooms; i++)
             {
@@ -344,11 +348,11 @@ namespace HospitalSimulation
                 }
             }
 
-            while (patients.GetPatient(numRooms+1)!= null)
+            while (patients.GetPatient(numRooms+1)!= null || stopper >= (shift + shiftOver))
             {
                 //counter++;
                 //System.Diagnostics.Debug.WriteLine(counter);
-                lowestRoomtime = 100000;
+                incrament = 100000;
                 //if not null -> if arrived -> if smaller than current room time
                 for (int z = 1; z <= numRooms; z++)
                 {
@@ -356,47 +360,42 @@ namespace HospitalSimulation
                     System.Diagnostics.Debug.WriteLine(patients.GetPatient(z).GetArrivalTime());
                     System.Diagnostics.Debug.Write("current Time");
                     System.Diagnostics.Debug.WriteLine(shift);*/
-                    //if (patients.GetPatient(z) != null)
+                    if (patients.GetPatient(z) != null)
                     {
-                        if (patients.GetPatient(z).GetArrivalTime() <= shift+shiftOver)
+                        if (patients.GetPatient(z).roomTimeManip < incrament && patients.GetPatient(z).GetArrivalTime() <= (shift + shiftOver))
                         {
-                            if (patients.GetPatient(z).roomTimeManip < lowestRoomtime)
-                            {
-                                lowestRoomtime = patients.GetPatient(z).roomTimeManip;
-                            }
+                            incrament = patients.GetPatient(z).roomTimeManip;
+                        }
+                        if (patients.GetPatient(z).GetArrivalTime() < incrament + (shift + shiftOver) && patients.GetPatient(z).GetArrivalTime() > (shift + shiftOver))
+                        {
+                            incrament = patients.GetPatient(z).GetArrivalTime() - (shift+shiftOver);
                         }
                     }
                 }
 
                 for (int i = 1; i <= numRooms; i++)
                 {
-                    //if (patients.GetPatient(i) != null)
+                    if (patients.GetPatient(i) != null)
                     {
-                        if (patients.GetPatient(i).GetArrivalTime() <= shift + shiftOver)
+                        if (patients.GetPatient(i).GetArrivalTime() <= (shift + shiftOver))
                         {
-                            /*if (patients.GetPatient(i).GetArrivalTime() < shift && patients.GetPatient(i).GetArrivalTime() > shift - lowestRoomtime)
-                            {
-                                System.Diagnostics.Debug.WriteLine("Is this Possible?");
-                                patients.GetPatient(i).roomTime -= (int)(shift - patients.GetPatient(i).GetArrivalTime());
-                            }*/
-                            patients.GetPatient(i).roomTimeManip -= lowestRoomtime;
+                           
+                            patients.GetPatient(i).roomTimeManip -= incrament;
 
                             //Creates inacuracies if value is less than zero as that is not propogated forward
-                            if (patients.GetPatient(i).roomTimeManip <= 0)
+                            if (patients.GetPatient(i).roomTimeManip == 0)
                             {
-                                if (patients.GetPatient(i).roomTimeManip == 0)
-                                {
-                                    patients.RemovePatient(i, shift + shiftOver);
-                                }
+                                    patients.RemovePatient(i, (shift + shiftOver)+incrament);
                             }
+                            
                         }
                     }
 
                 }
                 //System.Diagnostics.Debug.WriteLine(shift);
                 //Resort Queue
+                shiftOver += incrament;
                 patients.SortQueue((int)(shift + shiftOver));
-                shiftOver += lowestRoomtime;
             }
             results = new Results(shiftLen, rating1, rating2, rating3, rating4, patients.GetAvgWait1(shift+shiftOver), patients.GetAvgWait2(), patients.GetAvgWait3(),
                 patients.GetAvgWait4(), shiftOver/60, openRooms, instantSimNum);
