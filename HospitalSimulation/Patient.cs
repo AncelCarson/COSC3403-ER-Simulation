@@ -98,16 +98,16 @@ public class Patient
 
     public float GetWaitLength(float time)
     {
-        //System.Diagnostics.Debug.Write("wait time:\t");
-        //System.Diagnostics.Debug.Write(time - arrivalTime);
-        //System.Diagnostics.Debug.WriteLine("\t" + rating);
+        System.Diagnostics.Debug.Write("wait time:\t");
+        System.Diagnostics.Debug.Write(time +" "+ arrivalTime);
+        System.Diagnostics.Debug.WriteLine("\t" + rating);
         return time-arrivalTime - roomTime;
     }
     public float GetWaitLengthFinal(float time)
     {
-        //System.Diagnostics.Debug.Write("wait time:\t");
-        //System.Diagnostics.Debug.Write(time - arrivalTime);
-        //System.Diagnostics.Debug.WriteLine("\t" + rating);
+        System.Diagnostics.Debug.Write("wait time:\t");
+        System.Diagnostics.Debug.Write(time - arrivalTime);
+        System.Diagnostics.Debug.WriteLine("\t" + rating+" Final");
         return time - arrivalTime + (roomTimeManip - roomTime);
     }
     //sets the time the patient arrived at the hospital
@@ -178,8 +178,8 @@ public class Patient
                 break;
         }
 
-        if (rnd.Next(100) < 20)     //20% chance of extra time
-            roomTime += (int)((float)roomTime * ((float)rnd.Next(100) / 200.0));   //Add up to 50% more time
+       // if (rnd.Next(100) < 20)     //20% chance of extra time
+       //     roomTime += (int)((float)roomTime * ((float)rnd.Next(100) / 200.0));   //Add up to 50% more time
     }
 
     //randomly assigns time gap between patients

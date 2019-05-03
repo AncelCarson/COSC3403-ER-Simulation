@@ -218,6 +218,7 @@ namespace HospitalSimulation
             {
                 totalChance += severityRatings[i];
             }
+
             if (totalChance != 100)
             {
                 MessageBox.Show("Chance values must add to 100.", "Check values and try again");
@@ -227,6 +228,12 @@ namespace HospitalSimulation
             if(waitDelays[0] > waitDelays[1])
             {
                 MessageBox.Show("Delay values must be formatted minimum then maximum.", "Check values and try again");
+                return false;
+            }
+
+            if (waitDelays[0] == 0 && waitDelays[1]==0)
+            {
+                MessageBox.Show("Both minimum and maximum cannot be zero.", "Check values and try again");
                 return false;
             }
             return true;
@@ -273,7 +280,7 @@ namespace HospitalSimulation
                     System.Diagnostics.Debug.WriteLine(patients.GetPatient(z).GetArrivalTime());
                     System.Diagnostics.Debug.Write("current Time");
                     System.Diagnostics.Debug.WriteLine(shift);*/
-                    //if (patients.GetPatient(z) != null)
+                    if (patients.GetPatient(z) != null)
                     {
                         if (patients.GetPatient(z).GetArrivalTime() <= shift)
                         {
@@ -287,15 +294,11 @@ namespace HospitalSimulation
 
                 for (int i=1; i <= numRooms; i++)
                 {
-                    //if(patients.GetPatient(i)!= null)
+                    if(patients.GetPatient(i)!= null)
                     {
                         if (patients.GetPatient(i).GetArrivalTime() <= shift)
                         {
-                            /*if (patients.GetPatient(i).GetArrivalTime() < shift && patients.GetPatient(i).GetArrivalTime() > shift - lowestRoomtime)
-                            {
-                                System.Diagnostics.Debug.WriteLine("Is this Possible?");
-                                patients.GetPatient(i).roomTime -= (int)(shift - patients.GetPatient(i).GetArrivalTime());
-                            }*/
+                            
                             patients.GetPatient(i).roomTimeManip -= lowestRoomtime;
 
                             //Creates inacuracies if value is less than zero as that is not propogated forward
@@ -303,7 +306,7 @@ namespace HospitalSimulation
                             {
                                 if (patients.GetPatient(i).roomTimeManip == 0)
                                 {
-                                    patients.RemovePatient(i, shift);
+                                    patients.RemovePatient(i, shift + lowestRoomtime);
                                 }
                             }
                         }
@@ -356,7 +359,7 @@ namespace HospitalSimulation
                     System.Diagnostics.Debug.WriteLine(patients.GetPatient(z).GetArrivalTime());
                     System.Diagnostics.Debug.Write("current Time");
                     System.Diagnostics.Debug.WriteLine(shift);*/
-                    //if (patients.GetPatient(z) != null)
+                    if (patients.GetPatient(z) != null)
                     {
                         if (patients.GetPatient(z).GetArrivalTime() <= shift+shiftOver)
                         {
@@ -370,25 +373,19 @@ namespace HospitalSimulation
 
                 for (int i = 1; i <= numRooms; i++)
                 {
-                    //if (patients.GetPatient(i) != null)
+                    if (patients.GetPatient(i) != null)
                     {
                         if (patients.GetPatient(i).GetArrivalTime() <= shift + shiftOver)
                         {
-                            /*if (patients.GetPatient(i).GetArrivalTime() < shift && patients.GetPatient(i).GetArrivalTime() > shift - lowestRoomtime)
-                            {
-                                System.Diagnostics.Debug.WriteLine("Is this Possible?");
-                                patients.GetPatient(i).roomTime -= (int)(shift - patients.GetPatient(i).GetArrivalTime());
-                            }*/
+                           
                             patients.GetPatient(i).roomTimeManip -= lowestRoomtime;
 
                             //Creates inacuracies if value is less than zero as that is not propogated forward
-                            if (patients.GetPatient(i).roomTimeManip <= 0)
+                            if (patients.GetPatient(i).roomTimeManip == 0)
                             {
-                                if (patients.GetPatient(i).roomTimeManip == 0)
-                                {
                                     patients.RemovePatient(i, shift + shiftOver);
-                                }
                             }
+                            
                         }
                     }
 
