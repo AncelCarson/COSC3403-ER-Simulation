@@ -141,24 +141,27 @@ namespace HospitalSimulation
 
         private void FinishAdding()
         {
-            for(int i = 0; i > rooms; i++)
+            for(int i = 0; i < rooms; i++)
             {
-                switch (queue[i].GetRating())
+                if (queue[i] != null)
                 {
-                    case 1: rat1++; wait1 += queue[i].GetWaitLengthFinal(finishTime); break;
-                    case 2: rat2++; wait2 += queue[i].GetWaitLengthFinal(finishTime); break;
-                    case 3: rat3++; wait3 += queue[i].GetWaitLengthFinal(finishTime); break;
-                    case 4: rat4++; wait4 += queue[i].GetWaitLengthFinal(finishTime); break;
+                    switch (queue[i].GetRating())
+                    {
+                        case 1: rat1++; wait1 += queue[i].GetWaitLengthFinal(finishTime); break;
+                        case 2: rat2++; wait2 += queue[i].GetWaitLengthFinal(finishTime); break;
+                        case 3: rat3++; wait3 += queue[i].GetWaitLengthFinal(finishTime); break;
+                        case 4: rat4++; wait4 += queue[i].GetWaitLengthFinal(finishTime); break;
+                    }
                 }
             }
         }
 
         public int GetAvgWait1(float time)
         {
-            System.Diagnostics.Debug.Write(wait1+" ");
-            System.Diagnostics.Debug.WriteLine(rat1);
             finishTime = time;
             FinishAdding();
+            System.Diagnostics.Debug.Write(wait1 + " ");
+            System.Diagnostics.Debug.WriteLine(rat1);
             if (wait1==0 && rat1 ==0)
             {
                 return 0;
